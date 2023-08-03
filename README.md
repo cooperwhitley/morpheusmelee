@@ -1,7 +1,7 @@
 <img src="./assets/photos/readme_morph.jpg" alt="Morpheus Sleeping in a bowl" style="display: block; height: 8rem; margin-left: auto; margin-right: auto;">
 
 # Morpheus Melee
-## by Cooper Whitley
+###### by Cooper Whitley
 
 ## Overview
 My cat is an asshole. Whose isn't? This is how I think he sees the world when he goes from loving to fight mode. A micro JRPG about a cat biting the hand that feeds him.
