@@ -37,6 +37,3 @@ As a demanding user...
 ## Wireframe
 <img src="./assets/photos/basic_sketch.jpg" alt="Move choice screen" style="display: block; height: 20rem; margin-left: auto; margin-right: auto;">
 <img src="./assets/photos/basic_sketch_2.jpg" alt="Turn outcomes and game win/lose condition" style="display: block; height: 20rem; margin-left: auto; margin-right: auto;">
-
-## Entity Relationships
-<img src="./assets/photos/erd.png" alt="Entity Relationship Diagram" style="display: block; height: 20rem; width: auto; margin-left: auto; margin-right: auto;">
