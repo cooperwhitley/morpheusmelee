@@ -36,4 +36,6 @@ As a demanding user...
 - I want the explorable apartment to have other interactable elements
 ## Wireframe
 <img src="./assets/photos/basic_sketch.jpg" alt="Morpheus Sleeping in a bowl" style="display: block; height: 20rem; margin-left: auto; margin-right: auto;">
+
 ## Entity Relationships
+<img src="./assets/photos/erd.png" alt="Entity Relationship Diagram" style="display: block; height: 20rem; width: auto; margin-left: auto; margin-right: auto;">
