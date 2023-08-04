@@ -10,7 +10,7 @@ My cat is an asshole. Whose isn't? This is how I think he sees the world when he
 - CSS
 - JavaScript
 ## User Stories
-#### Minmum Viable Product
+#### Minimum Viable Product
 As a user...
 - I want to control a character (Morpheus)
 - I want there to be an enemy character (Cooper)
