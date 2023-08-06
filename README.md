@@ -1,4 +1,4 @@
-<img src="./assets/photos/readme_morph.jpg" alt="Morpheus Sleeping in a bowl" style="display: block; height: 8rem; margin-left: auto; margin-right: auto;">
+<img src="./assets/sprites/morpheusmeleeheader.png" alt="Pixel art header with title of game and sprites of Cooper and Morpheus" style="display: block; margin-left: auto; margin-right: auto;">
 
 # Morpheus Melee
 ###### by Cooper Whitley
