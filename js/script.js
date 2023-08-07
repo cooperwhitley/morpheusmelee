@@ -1,9 +1,9 @@
 /*---constants---*/
 const attacks = [
-    { name: 'BITE', info: '' },
-    { name: 'SCRATCH', info: '' },
-    { name: 'LUNGE', info: '' },
-    { name: 'SWIPE', info: '' }
+    { name: 'BITE', info: '', pawLocation: '5 / 1 / 6 / 2' },
+    { name: 'SCRATCH', info: '', pawLocation: '6 / 1 / 7 / 2' },
+    { name: 'LUNGE', info: '', pawLocation: '5 / 6 / 6 / 7' },
+    { name: 'SWIPE', info: '', pawLocation: '6 / 6 / 7 / 7' }
 ];
 const menuOptionLocations = [
     ['top-left', 'top-right'],
@@ -39,11 +39,24 @@ const enemySpriteEl = document.getElementById('enemy');
 /*---functions---*/
 
 // init
-// deploy action titles to menu option divs
-menuOptionEls.forEach((option) => {
-    option.innerText = attacks[menuOptionEls.indexOf(option)].name;
-});
+// move indicator based on hover
+function moveSelectorElByHover(event) {
+    menuSelectorEl.style.visibility = 'visible';
+    menuSelectorEl.style.gridArea = attacks[menuOptionEls.indexOf(event.target)].pawLocation;
+}
+function removeSelectorElAfterHover(event) {
+    menuSelectorEl.style.visibility = 'hidden';
+}
 // init player turn
+function initPlayerTurn() {
+    // deploy action titles to menu option divs
+    menuOptionEls.forEach((option) => {
+        option.innerText = attacks[menuOptionEls.indexOf(option)].name;
+        option.addEventListener('mouseover', moveSelectorElByHover);
+        option.addEventListener('mouseout', removeSelectorElAfterHover);
+    });
+}
+initPlayerTurn();
 // handle player move choice
 // enemy turn
 // add text (called by move handler and enemy turn)
@@ -52,4 +65,5 @@ menuOptionEls.forEach((option) => {
 /*---event listeners---*/
 
 // menu choices
+// menu hover
 // textbox advance
