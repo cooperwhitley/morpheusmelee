@@ -1,3 +1,4 @@
+/* start overall document */
 body {
     display: flex;
     align-items: center;
@@ -21,8 +22,9 @@ body {
     grid-template-rows: repeat(6, 125px);
     grid-template-columns: repeat(10, 100px);
 }
+/* end overall document */
 
-/* basic objects */
+/* start basic objects */
 #background {
     grid-area: 1 / 1 / 5 / 11;
     z-index: 1;
@@ -40,8 +42,9 @@ body {
     grid-area: 5 / 1 / 7 / 11;
     z-index: 1;
 }
+/* end basic objects */
 
-/* menu */
+/* start menu */
 .menu-items {
     font-size: 50px;
     align-self: center;
@@ -75,9 +78,23 @@ body {
 }
 #pawprint{
     height: 40px;
+    animation: fadeInOut 1.5s linear infinite;
 }
+    /* animate fade on pawprint indicator */
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 100%;
+    }
+    25%, 75% {
+        opacity: 90%
+    }
+    50% {
+        opacity: 0%;
+    }
+}
+/* end menu */
 
-/* info boxes */
+/* start info boxes */
 .infobox {
     animation: upAndDown 1.75s linear infinite;
     align-self: center;
@@ -113,7 +130,7 @@ body {
     margin-top: -35px;
     font-size: 30px;
 }
-/* animate infoboxes to bounce */
+    /* animate infoboxes to bounce */
 @keyframes upAndDown {
     0%, 100% {
         margin-bottom: 0;
@@ -122,3 +139,4 @@ body {
         margin-bottom: 20px;
     }
 }
+/* end info boxes */

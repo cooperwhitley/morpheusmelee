@@ -1,9 +1,9 @@
 /*---constants---*/
 const attacks = [
-    { name: 'BITE', info: '' },
-    { name: 'SCRATCH', info: '' },
-    { name: 'LUNGE', info: '' },
-    { name: 'SWIPE', info: '' }
+    { name: 'BITE', info: '', pawLocation: '' },
+    { name: 'SCRATCH', info: '', pawLocation: '' },
+    { name: 'LUNGE', info: '', pawLocation: '' },
+    { name: 'SWIPE', info: '', pawLocation: '' }
 ];
 const menuOptionLocations = [
     ['top-left', 'top-right'],
