@@ -71,7 +71,7 @@ body {
     z-index: 2;
 }
 #selecticon{
-    grid-area: 5 / 1 / 6 / 2;
+    visibility: hidden;
     z-index: 2;
     justify-self: flex-end;
     align-self: center;
