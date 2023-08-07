@@ -35,22 +35,22 @@ const menuOptionLocations = [
 const cooperAttacks = [
     {
         name: 'NERF GUN',
-        info: 'COOPER USED NERF GUN',
+        info: 'COOPER SHOT AT MORPHEUS',
         dmg: -10
     },
     {
         name: 'PET',
-        info: 'COOPER PET MORPHEUS',
+        info: 'COOPER PET MORPHEUS AND SCRATCHED HIM BEHIND THE EAR',
         dmg: -5
     },
     {
         name: 'GIVE TREAT',
-        info: 'COOPER GAVE MORPHEUS A TREAT',
+        info: "COOPER GAVE MORPHEUS A TASTY TREAT, HE DOESN'T DO THAT ENOUGH",
         dmg: -20
     },
     {
         name: 'SHOUT',
-        info: '',
+        info: 'COOPER YELLED AT MORPHEUS: "QUIT BEING AN ASSHOLE"',
         dmg: -5
     }
 ]
@@ -59,7 +59,7 @@ const cooperAttacks = [
 
 // text menu
 let menu;
-// turn
+// turn, value 0-6, 0 being initial greeting, then loop combat in 1-6
 let turn;
 // win condition
 let winner;
@@ -86,24 +86,19 @@ let enemyHealth = document.getElementById('enemy-healthbar');
 /*---functions---*/
 
 // init
+function init() {
+    winner = null;
+    turn = 0;
+    menu = 0;
+}
 // move indicator based on hover
 function moveSelectorElByHover(event) {
     menuSelectorEl.style.visibility = 'visible';
     menuSelectorEl.style.gridArea = attacks[menuOptionEls.indexOf(event.target)].pawLocation;
 }
-function removeSelectorElAfterHover(event) {
+function removeSelectorElAfterHover() {
     menuSelectorEl.style.visibility = 'hidden';
 }
-// init player turn
-function initPlayerTurn() {
-    // deploy action titles to menu option divs
-    menuOptionEls.forEach((option) => {
-        option.innerText = attacks[menuOptionEls.indexOf(option)].name;
-        option.addEventListener('mouseover', moveSelectorElByHover);
-        option.addEventListener('mouseout', removeSelectorElAfterHover);
-    });
-}
-initPlayerTurn();
 // handle player move choice
 // enemy turn
 // add text (called by move handler and enemy turn)
@@ -111,6 +106,12 @@ initPlayerTurn();
 
 /*---event listeners---*/
 
-// menu choices
+// deploy action titles to menu option divs and add hover icon
+menuOptionEls.forEach((option) => {
+    option.innerText = attacks[menuOptionEls.indexOf(option)].name;
+    option.addEventListener('mouseover', moveSelectorElByHover);
+    option.addEventListener('mouseout', removeSelectorElAfterHover);
+});
+    // menu choices
 // menu hover
 // textbox advance
