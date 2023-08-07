@@ -2,25 +2,25 @@
 const attacks = [
     { 
         name: 'BITE', 
-        info: '', 
+        info: 'MORPHEUS BIT', 
         pawLocation: '5 / 1 / 6 / 2',
         dmg: 10
     },
     { 
         name: 'SCRATCH',
-        info: '',
+        info: 'MORPHEUS SCRATCHED THE SHIT OUT OF',
         pawLocation: '6 / 1 / 7 / 2',
         dmg: 10
     },
     {
         name: 'LUNGE',
-        info: '',
+        info: 'MORPHEUS LUNGED AT',
         pawLocation: '5 / 6 / 6 / 7',
         dmg: 15
     },
     {
         name: 'SWIPE',
-        info: '',
+        info: 'MORPHEUS SWIPED AT',
         pawLocation: '6 / 6 / 7 / 7',
         dmg: 5
     }
@@ -33,9 +33,12 @@ const menuOptionLocations = [
 
 /*---state variables---*/
 
-// text window
+// text menu
+let menu;
 // turn
+let turn;
 // win condition
+let winner;
 
 
 /*---cached elements---*/
