@@ -4,7 +4,13 @@ const menuOptionDivs = [];
 for (i = 0; i <= 3; i++) {
     menuOptionDivs.push(document.getElementById(`option-${i}`));
 }
-menuOptionDivs.forEach((item) => item.innerText = 'sample');
+const actions = [
+    "BITE",
+    "SCRATCH",
+    "LUNGE",
+    "SWIPE"
+];
+
 
 
 /*---state variables---*/
@@ -17,6 +23,10 @@ menuOptionDivs.forEach((item) => item.innerText = 'sample');
 
 /*---functions---*/
 
+// deploy action titles to menu option divs
+menuOptionDivs.forEach((option) => {
+    option.innerText = actions[menuOptionDivs.indexOf(option)];
+});
 
 
 /*---event listeners---*/
