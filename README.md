@@ -9,6 +9,8 @@ My cat is an asshole. Whose isn't? This is how I think he sees the world when he
 - Html
 - CSS
 - JavaScript
+- Aseprite
+- Avid ProTools
 ## User Stories
 #### Minimum Viable Product
 As a user...

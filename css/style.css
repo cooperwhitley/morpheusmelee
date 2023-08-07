@@ -77,23 +77,20 @@ body {
     height: 40px;
 }
 .infobox {
-    animation: upAndDown 3s linear infinite;
-    z-index: 3;
+    /* animation: upAndDown 3s linear infinite; */
     align-self: center;
 }
-#player-infobox {
+.player-infobox {
     grid-area: 2 / 2 / 4 / 5;
+    z-index: 3;
 }
-#enemy-infobox {
+.enemy-infobox {
     grid-area: 1 / 7 / 3 / 11;
-}
-.infobox-items {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    z-index: 3;
 }
 .healthbar {
     border: none;
+    width: 225px;
     z-index: 4;
     align-self: center;
     justify-self: center;
