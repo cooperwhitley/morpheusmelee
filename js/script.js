@@ -1,4 +1,5 @@
 /*---constants---*/
+// player attacks
 const attacks = [
     { 
         name: 'BITE', 
@@ -29,7 +30,30 @@ const menuOptionLocations = [
     ['top-left', 'top-right'],
     ['bottom-left', 'bottom-right']
 ];
-
+// enemy attacks
+    // cooper attacks
+const cooperAttacks = [
+    {
+        name: 'NERF GUN',
+        info: 'COOPER USED NERF GUN',
+        dmg: -10
+    },
+    {
+        name: 'PET',
+        info: 'COOPER PET MORPHEUS',
+        dmg: -5
+    },
+    {
+        name: 'GIVE TREAT',
+        info: 'COOPER GAVE MORPHEUS A TREAT',
+        dmg: -20
+    },
+    {
+        name: 'SHOUT',
+        info: '',
+        dmg: -5
+    }
+]
 
 /*---state variables---*/
 
