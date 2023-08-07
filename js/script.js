@@ -15,8 +15,6 @@ const menuOptionLocations = [
 
 // text window
 // turn
-// player health
-// enemy health
 // win condition
 
 
@@ -34,7 +32,9 @@ const textBoxEl = document.getElementById('text');
 // character sprites
 const playerSpriteEl = document.getElementById('player');
 const enemySpriteEl = document.getElementById('enemy');
-
+// character health
+let morpheusHealth = document.getElementById('player-healthbar');
+let enemyHealth = document.getElementById('enemy-healthbar');
 
 /*---functions---*/
 

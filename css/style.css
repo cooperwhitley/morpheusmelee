@@ -54,6 +54,12 @@ body {
 .menu-items:hover {
     color: #ccb744;
 }
+#text {
+    grid-area: 5 / 2 / 7 / 10;
+    z-index: 2;
+    line-height: 125px;
+    visibility: hidden;
+}
 #option-0 {
     grid-area: 5 / 2 / 6 / 6;
     z-index: 2;
