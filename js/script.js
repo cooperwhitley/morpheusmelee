@@ -41,7 +41,7 @@ const enemySpriteEl = document.getElementById('enemy');
 // init
 // deploy action titles to menu option divs
 menuOptionEls.forEach((option) => {
-    option.innerText = attacks[menuOptionEls.indexOf(option)];
+    option.innerText = attacks[menuOptionEls.indexOf(option)].name;
 });
 // init player turn
 // handle player move choice
