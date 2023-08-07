@@ -1,9 +1,29 @@
 /*---constants---*/
 const attacks = [
-    { name: 'BITE', info: '', pawLocation: '5 / 1 / 6 / 2' },
-    { name: 'SCRATCH', info: '', pawLocation: '6 / 1 / 7 / 2' },
-    { name: 'LUNGE', info: '', pawLocation: '5 / 6 / 6 / 7' },
-    { name: 'SWIPE', info: '', pawLocation: '6 / 6 / 7 / 7' }
+    { 
+        name: 'BITE', 
+        info: '', 
+        pawLocation: '5 / 1 / 6 / 2',
+        dmg: 10
+    },
+    { 
+        name: 'SCRATCH',
+        info: '',
+        pawLocation: '6 / 1 / 7 / 2',
+        dmg: 10
+    },
+    {
+        name: 'LUNGE',
+        info: '',
+        pawLocation: '5 / 6 / 6 / 7',
+        dmg: 15
+    },
+    {
+        name: 'SWIPE',
+        info: '',
+        pawLocation: '6 / 6 / 7 / 7',
+        dmg: 5
+    }
 ];
 const menuOptionLocations = [
     ['top-left', 'top-right'],
