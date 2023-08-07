@@ -37,8 +37,15 @@ As a demanding user...
 - I want a separate screen to explore the apartment to choose a target
 - I want the explorable apartment to have other interactable elements
 ## Wireframe
+#### First Wireframes
 <img src="./assets/photos/basic_sketch.jpg" alt="Move choice screen" style="display: block; height: 20rem; margin-left: auto; margin-right: auto;">
 <img src="./assets/photos/basic_sketch_2.jpg" alt="Turn outcomes and game win/lose condition" style="display: block; height: 20rem; margin-left: auto; margin-right: auto;">
+
+#### Functioning Layout Wireframe
+<img src="./assets/photos/wireframe-render.png" alt="Final layout for main fight screen" style="display: block; height: 20rem; margin-left: auto; margin-right: auto;">
+
+#### Planning Wireframes
+<img src="./assets/photos/turn-loop-wireframe.jpg" alt="Mockup of turn loop logic" style="display: block; height: 20rem; margin-left: auto; margin-right: auto;">
 
 ## Morby
 
