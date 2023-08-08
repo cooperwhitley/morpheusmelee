@@ -77,6 +77,7 @@ const cooper = {
         'HEY! WHAT WAS THAT ABOUT', 
         'WHY ARE YOU LIKE THIS'
     ],
+    pronouns: ['HE', 'HIM', 'HIS'],
     health: 0
 }
 
@@ -87,7 +88,7 @@ let menu;
 // turn, value 0-6, 0 being initial greeting, then loop combat in 1-6
 let turn;
 // win condition
-let winner;
+let winner = 0;
 //morph boy mode status
 let morphBoyMode = 1;
 // check if text is printed
@@ -131,7 +132,7 @@ const bodyEl = document.querySelector('body');
 
 // init();
 function init() {
-    winner = null;
+    winner = 0;
     turn = 0;
     menu = 0;
     turn0();
@@ -176,6 +177,7 @@ damageToApply = player.attacks[1].dmg
 function turn2() {
     // make textPrinted false
     textPrinted = false;
+    textBoxEl.innerText = '';
     // make textbox visible and menu choices invisible
     textBoxEl.style.visibility = 'visible'
     for (let option of menuOptionEls) {
@@ -183,33 +185,47 @@ function turn2() {
     }
     // print action text
     let actionText = `${moveChoice.info} ${enemy.name}`;
-    console.log(actionText)
     typeSentence(actionText, textBoxEl);
     waitAndRenderSelectorEl(actionText);
     // apply and animate damage received
     enemy.health += damageToApply;
     enemyHealth.value += damageToApply;
     pain(enemySpriteEl);
-    // check for winner
 }
-turn2();
 
 // turn 3 - enemy reaction text to morpheus' attack
 function turn3() {
     // make textPrinted false
+    textPrinted = false;
+    // clear text
+    textBoxEl.innerText = '';
+    textBoxEl.style.visibility = 'visible'
     // if winner = true print win message, else print reaction text
+    checkWinner();
+    let reactionText;
+    if (winner === 1) {
+        reactionText = `${enemy.name} GOT SO PISSED OFF THAT ${enemy.pronouns[0]} LEFT`
+    } else if (winner === 0){
+        reactionText = `${enemy.name}: ${enemy.reactions[Math.floor(Math.random() * enemy.reactions.length)]}`
+    }
+    typeSentence(reactionText, textBoxEl);
+    waitAndRenderSelectorEl(reactionText);
 }
 
+turn3();
 // turn 4 - enemy chooses attack
 function turn4() {
     // make textPrinted false
+    textPrinted = false;
     // choose random enemy attack
+    // clear text
     // print what attack is chosen
 }
 
 // turn 5 - enemy attack animation & text
 function turn5() {
     // make textPrinted false
+    // clear text
     // print action text
     // apply and animate damage received
     // check for winner
@@ -218,6 +234,7 @@ function turn5() {
 // turn 6 - morpheus reaction text to enemy attack
 function turn6() {
     // make textPrinted false
+    // clear text
     // if winner = true print win message, else print reaction text
 }
 
@@ -231,6 +248,13 @@ function handleMoveChoice() {
     // set damage to apply
 }
 
+function checkWinner() {
+    if (enemy.health < 1) {
+        winner = 1;
+    } else if (player.health === 0) {
+        winner = -1;
+    } else winner = 0;
+}
 // /turn logic
 
 
@@ -243,6 +267,13 @@ function moveSelectorElByHover(event) {
 }
 function removeSelectorElAfterHover() {
     menuSelectorEl.style.visibility = 'hidden';
+}
+
+function renderTextBoxEl() {
+
+}
+function renderMenuEls() {
+    
 }
 
 function toggleMorphBoyMode() {
@@ -264,6 +295,7 @@ async function pain(target) {
     target.style.filter = 'none';
     await waitForMs(25);
     }
+    return;
 }
 
 // 
@@ -275,6 +307,7 @@ async function waitAndRenderSelectorEl(str) {
     menuSelectorEl.style.visibility = 'visible';
     menuSelectorEl.style.gridArea = '6 / 10 / 7 / 11';
     menuSelectorEl.style.justifySelf = 'center';
+    return;
 }
 
 async function typeSentence(str, elId) {
