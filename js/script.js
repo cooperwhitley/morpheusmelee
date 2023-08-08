@@ -91,7 +91,7 @@ let menu;
 // turn, value 0-6, 0 being initial greeting, then loop combat in 1-6
 let turn;
 // win condition
-let winner = 0;
+let winner;
 //morph boy mode status
 let morphBoyMode = 1;
 // check if text is printed
@@ -106,12 +106,14 @@ let enemy = cooper;
 let enemyMoveChoice;
 
 // health
-enemy.health = 100;
-player.health = 100;
+enemy.health;
+player.health;
 
 
 /*---cached elements---*/
 
+// menu
+const menuEl = document.getElementById('menu');
 // menu option divs
 const menuOptionEls = [];
 for (i = 0; i <= 3; i++) {
@@ -128,6 +130,12 @@ const enemySpriteEl = document.getElementById('enemy');
 let playerHealth = document.getElementById('player-healthbar');
 let enemyHealth = document.getElementById('enemy-healthbar');
 
+// message boxes
+let infoBoxEls = document.getElementsByClassName('infobox');
+
+// try again button
+let retryButton = document.getElementById('win-message');
+
 // morph boy mode button
 const morphBoyModeEl = document.getElementById('morphboy-mode');
 const gameWindow = document.getElementById('game-window');
@@ -139,6 +147,16 @@ function init() {
     winner = 0;
     turn = 0;
     menu = 0;
+    retryButton.style.visibility = 'hidden';
+    for (let item of infoBoxEls) {
+        item.style.visibility = 'visible';
+    } 
+    enemySpriteEl.visibility = 'visible';
+    playerSpriteEl.visibility = 'visible';
+    player.health = 100;
+    enemy.health = 0;
+    playerHealth.value = 100;
+    enemyHealth.value = 0;
     turn0();
 }
 // turn logic
@@ -195,7 +213,7 @@ function turn3() {
     checkWinner();
     let reactionText;
     if (winner === 1) {
-        reactionText = `${enemy.name} GOT SO PISSED OFF THAT ${enemy.pronouns[0]} LEFT`
+        reactionText = `${enemy.name} GOT SO PISSED OFF THAT ${enemy.pronouns[0]} LEFT. YOU WIN?`
     } else if (winner === 0){
         reactionText = `${enemy.name}: ${enemy.reactions[Math.floor(Math.random() * enemy.reactions.length)]}`
     }
@@ -240,9 +258,9 @@ function turn6() {
     checkWinner();
     let reactionText;
     if (winner === -1) {
-        reactionText = `MORPHEUS IS NO LONGER EXCITED AND IS GONNA TAKE A NAP`
+        reactionText = `MORPHEUS IS NO LONGER EXCITED AND IS GONNA TAKE A NAP.`
     } else if (winner === 0){
-        reactionText = `${player.name}: ${player.reactions[Math.floor(Math.random() * player.reactions.length)]}`
+        reactionText = `MORPHEUS: ${player.reactions[Math.floor(Math.random() * player.reactions.length)]}`
     }
     typeSentence(reactionText, textBoxEl);
     waitAndRenderSelectorEl(reactionText);
@@ -259,17 +277,30 @@ function advanceTurn() {
     } else return;
 }
 
-function handleMoveChoice() {
-    // set move choice
-    // set damage to apply
+function handleMoveChoice(evt) {
+    let evtId = evt.target.getAttribute('id');
+    let evtIdArr = evtId.split('')
+    attackId = parseInt(evtIdArr[evtIdArr.length - 1]);
+    moveChoice = player.attacks[attackId];
+    damageToApply = moveChoice.dmg;
+    turn += 1;
+    turns[turn]();
 }
 
 function checkWinner() {
-    if (enemy.health < 1) {
+    if (enemy.health >= 100) {
         winner = 1;
-    } else if (player.health === 0) {
+        enemySpriteEl.visibility = 'hidden';
+    } else if (player.health <= 0) {
         winner = -1;
+        playerSpriteEl.visibility = 'hidden';
     } else winner = 0;
+    if (winner !== 0) {
+        retryButton.style.visibility = 'visible';
+        for (let item of infoBoxEls) {
+            item.style.visibility = 'hidden';
+        }
+    }
 }
 // /turn logic
 
@@ -328,7 +359,7 @@ async function pain(target) {
 // 
 // text print fn
 async function waitAndRenderSelectorEl(str) {
-    const timeToWait = (str.length + 1) * 50;
+    const timeToWait = (str.length + 1) * 25;
     await waitForMs(timeToWait);
     textPrinted = true;
     menuSelectorEl.style.visibility = 'visible';
@@ -342,7 +373,7 @@ async function typeSentence(str, elId) {
     let i = 0;
     let typingTarget = elId;
     while (i < letters.length) {
-        await waitForMs(50);
+        await waitForMs(25);
         typingTarget.append(letters[i]);
         i++
     }
@@ -371,9 +402,14 @@ function waitForMs(ms) {
 /*---event listeners---*/
 
 
-    // menu choices
+// menu choices
+for (let option of menuOptionEls) {
+    option.addEventListener('click', handleMoveChoice);
+}
 // menu hover
 // textbox advance
 textBoxEl.addEventListener('click', advanceTurn);
+menuEl.addEventListener('click', advanceTurn);
 // morph boy mode button
 morphBoyModeEl.addEventListener('click', toggleMorphBoyMode);
+retryButton.addEventListener('click', init);

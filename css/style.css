@@ -75,6 +75,22 @@ body {
     grid-area: 5 / 1 / 7 / 11;
     z-index: 1;
 }
+#win-message {
+    grid-area: 2 / 4 / 4 / 8;
+    z-index: 4;
+    align-self: center;
+    justify-self: center;
+    border: 10px solid #23232b;
+    background-color: #66666e;
+    padding: 30px;
+    width: 300px;
+    font-size: 50px;
+    visibility: hidden;
+    text-align: center;
+}
+#win-message:hover {
+    color: #ccb744;
+}
 /* end basic objects */
 
 /* start menu */
