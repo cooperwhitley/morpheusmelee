@@ -65,6 +65,10 @@ let turn;
 let winner;
 //morph boy mode status
 let morphBoyMode = 1;
+// check if text is printed
+let textPrinted = false;
+// store damage to be applied
+let damageToApply;
 
 /*---cached elements---*/
 
@@ -96,6 +100,65 @@ function init() {
     turn = 0;
     menu = 0;
 }
+
+// turn logic
+
+// turn 0 - enemy greets morpheus
+function turnZero() {
+    // make textbox visible and menu choices invisible
+    // print greeting text
+    // move pawprint to bottom right of menu and only show if textPrinted is true
+}
+
+// turn 1 - morpheus chooses attack
+function turnOne() {
+    // make textbox invisible and menu choices visible
+    // move pawprint based on highlighted menu selection
+    // listen for action choice
+}
+
+// turn 2 - attack animation and flavor text for morpheus' attack
+function turnTwo() {
+    // make textPrinted false
+    // make textbox visible and menu choices invisible
+    // print action text
+    // apply and animate damage received
+    // move pawprint to bottom right of menu
+    // check for winner
+}
+
+// turn 3 - enemy reaction text to morpheus' attack
+function turnThree() {
+    // make textPrinted false
+    // if winner = true print win message, else print reaction text
+}
+
+// turn 4 - enemy chooses attack
+function turnFour() {
+    // make textPrinted false
+    // choose random enemy attack
+    // print what attack is chosen
+}
+
+// turn 5 - enemy attack animation & text
+function turnFive() {
+    // make textPrinted false
+    // print action text
+    // apply and animate damage received
+    // check for winner
+}
+
+// turn 6 - morpheus reaction text to enemy attack
+function turnSix() {
+    // make textPrinted false
+    // if winner = true print win message, else print reaction text
+}
+
+// /turn logic
+
+
+
+// graphical functions
 // move indicator based on hover
 function moveSelectorElByHover(event) {
     menuSelectorEl.style.visibility = 'visible';
@@ -104,9 +167,7 @@ function moveSelectorElByHover(event) {
 function removeSelectorElAfterHover() {
     menuSelectorEl.style.visibility = 'hidden';
 }
-// handle player move choice
-// enemy turn
-// add text (called by move handler and enemy turn)
+
 function toggleMorphBoyMode() {
     morphBoyMode *= -1;
     if (morphBoyMode === -1) {
@@ -117,6 +178,37 @@ function toggleMorphBoyMode() {
         bodyEl.style.backgroundColor = 'rgba(58, 58, 58,255)';
     }
 };
+
+// text print fn
+async function typeSentence(str, elId) {
+    const letters = str.split('');
+    let i = 0;
+    let typingTarget = elId;
+    // time to wait calculates how long to wait for textPrinted to be true
+    while (i < letters.length) {
+        await waitForMs(100);
+        typingTarget.append(letters[i]);
+        i++
+    }
+    return;
+}
+
+// delete text fn
+async function deleteSentence(elId) {
+    const sentence = elId.innerText;
+    const letters = sentence.split("");
+    let i = 0;
+    while(letters.length > 0) {
+        await waitForMs(100);
+        letters.pop();
+        document.getElementById(elId).innerText = letters.join("");
+    }
+}
+
+// wait promise constructor
+function waitForMs(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
 
 /*---event listeners---*/
 
