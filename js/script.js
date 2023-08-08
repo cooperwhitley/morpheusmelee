@@ -47,22 +47,22 @@ const cooper = {
         {
             name: 'NERF GUN',
             info: 'COOPER SHOT AT MORPHEUS',
-            dmg: -10
+            dmg: 10
         },
         {
             name: 'PET',
             info: 'COOPER PET MORPHEUS AND SCRATCHED HIM BEHIND THE EAR',
-            dmg: -5
+            dmg: 5
         },
         {
             name: 'GIVE TREAT',
             info: "COOPER GAVE MORPHEUS A TASTY TREAT, HE DOESN'T DO THAT ENOUGH",
-            dmg: -20
+            dmg: 20
         },
         {
             name: 'SHOUT',
             info: 'COOPER YELLED AT MORPHEUS: "QUIT BEING AN ASSHOLE"',
-            dmg: -5
+            dmg: 5
         }
     ],
     greetings: [
@@ -100,6 +100,7 @@ let moveChoice;
 
 // enemy choice
 let enemy = cooper;
+let enemyMoveChoice;
 
 // health
 enemy.health = 100;
@@ -121,7 +122,7 @@ const textBoxEl = document.getElementById('text');
 const playerSpriteEl = document.getElementById('player');
 const enemySpriteEl = document.getElementById('enemy');
 // character health
-let morpheusHealth = document.getElementById('player-healthbar');
+let playerHealth = document.getElementById('player-healthbar');
 let enemyHealth = document.getElementById('enemy-healthbar');
 
 // morph boy mode button
@@ -142,10 +143,7 @@ function init() {
 // turn 0 - enemy greets morpheus
 function turn0() {
     // make textbox visible and menu choices invisible
-    textBoxEl.style.visibility = 'visible'
-    for (let option of menuOptionEls) {
-        option.style.visibility = 'hidden'
-    }
+    renderTextBoxEl();
     // print greeting text
     let randomGreeting = `${enemy.name}: ${enemy.greetings[Math.floor(Math.random() * enemy.greetings.length)]}`
     typeSentence(randomGreeting, textBoxEl)
@@ -156,10 +154,7 @@ function turn0() {
 // turn 1 - morpheus chooses attack
 function turn1() {
     // make textbox invisible and menu choices visible
-    textBoxEl.style.visibility = 'hidden'
-    for (let option of menuOptionEls) {
-        option.style.visibility = 'visible'
-    }
+    renderMenuEls();
     // move pawprint based on highlighted menu selection
     // deploy action titles to menu option divs and add hover icon
     menuOptionEls.forEach((option) => {
@@ -177,12 +172,8 @@ damageToApply = player.attacks[1].dmg
 function turn2() {
     // make textPrinted false
     textPrinted = false;
-    textBoxEl.innerText = '';
     // make textbox visible and menu choices invisible
-    textBoxEl.style.visibility = 'visible'
-    for (let option of menuOptionEls) {
-        option.style.visibility = 'hidden'
-    }
+    renderTextBoxEl();
     // print action text
     let actionText = `${moveChoice.info} ${enemy.name}`;
     typeSentence(actionText, textBoxEl);
@@ -198,8 +189,7 @@ function turn3() {
     // make textPrinted false
     textPrinted = false;
     // clear text
-    textBoxEl.innerText = '';
-    textBoxEl.style.visibility = 'visible'
+    renderTextBoxEl();
     // if winner = true print win message, else print reaction text
     checkWinner();
     let reactionText;
@@ -212,34 +202,54 @@ function turn3() {
     waitAndRenderSelectorEl(reactionText);
 }
 
-turn3();
 // turn 4 - enemy chooses attack
 function turn4() {
     // make textPrinted false
     textPrinted = false;
+    renderTextBoxEl();
     // choose random enemy attack
-    // clear text
+    enemyMoveChoice = enemy.attacks[Math.floor(Math.random() * enemy.attacks.length)]
     // print what attack is chosen
+    let enemyMoveName = `${enemy.name} USED ${enemyMoveChoice.name}`;
+    typeSentence(enemyMoveName, textBoxEl);
+    waitAndRenderSelectorEl(enemyMoveName);
 }
 
 // turn 5 - enemy attack animation & text
 function turn5() {
     // make textPrinted false
-    // clear text
+    textPrinted = false;
+    renderTextBoxEl();
     // print action text
+    let enemyActionText = enemyMoveChoice.info;
+    typeSentence(enemyActionText, textBoxEl);
+    waitAndRenderSelectorEl(enemyActionText);
     // apply and animate damage received
-    // check for winner
+    player.health -= enemyMoveChoice.dmg;
+    playerHealth.value -= enemyMoveChoice.dmg;
+    pain(playerSpriteEl);
 }
 
 // turn 6 - morpheus reaction text to enemy attack
 function turn6() {
     // make textPrinted false
-    // clear text
+    textPrinted = false;
+    renderTextBoxEl();
     // if winner = true print win message, else print reaction text
+    checkWinner();
+    let reactionText;
+    if (winner === -1) {
+        reactionText = `MORPHEUS IS NO LONGER EXCITED AND IS GONNA TAKE A NAP`
+    } else if (winner === 0){
+        reactionText = `${player.name}: ${player.reactions[Math.floor(Math.random() * player.reactions.length)]}`
+    }
+    typeSentence(reactionText, textBoxEl);
+    waitAndRenderSelectorEl(reactionText);
 }
 
 function advanceTurn() {
     // check if textPrinted
+    if (!textPrinted && turn != 1)
     // advance to next turn
 }
 
@@ -270,10 +280,18 @@ function removeSelectorElAfterHover() {
 }
 
 function renderTextBoxEl() {
-
+    textBoxEl.style.visibility = 'visible'
+    for (let option of menuOptionEls) {
+        option.style.visibility = 'hidden'
+    }
+    textBoxEl.innerText = '';
 }
 function renderMenuEls() {
-    
+    textBoxEl.style.visibility = 'hidden'
+    for (let option of menuOptionEls) {
+        option.style.visibility = 'visible'
+    }
+    textBoxEl.innerText = '';
 }
 
 function toggleMorphBoyMode() {
