@@ -189,6 +189,7 @@ function turn2() {
     // apply and animate damage received
     enemy.health += damageToApply;
     enemyHealth.value += damageToApply;
+    pain(enemySpriteEl);
     // check for winner
 }
 turn2();
@@ -255,8 +256,14 @@ function toggleMorphBoyMode() {
     }
 };
 
-function pain(target) {
-    target.style.animation = 'pain 50ms linear 5'
+async function pain(target) {
+    target.style.animation = 'pain 50ms linear 5';
+    for (i = 0; i <= 5; i++) {
+    target.style.filter = 'invert(39%) sepia(77%) saturate(5000%) hue-rotate(3deg) brightness(105%) contrast(300%)'
+    await waitForMs(25);
+    target.style.filter = 'none';
+    await waitForMs(25);
+    }
 }
 
 // 
