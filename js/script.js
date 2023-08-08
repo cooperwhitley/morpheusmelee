@@ -63,7 +63,8 @@ let menu;
 let turn;
 // win condition
 let winner;
-
+//morph boy mode status
+let morphBoyMode = 1;
 
 /*---cached elements---*/
 
@@ -83,6 +84,10 @@ const enemySpriteEl = document.getElementById('enemy');
 let morpheusHealth = document.getElementById('player-healthbar');
 let enemyHealth = document.getElementById('enemy-healthbar');
 
+// morph boy mode button
+const morphBoyModeEl = document.getElementById('morphboy-mode');
+const gameWindow = document.getElementById('game-window');
+const bodyEl = document.querySelector('body');
 /*---functions---*/
 
 // init
@@ -102,7 +107,16 @@ function removeSelectorElAfterHover() {
 // handle player move choice
 // enemy turn
 // add text (called by move handler and enemy turn)
-
+function toggleMorphBoyMode() {
+    morphBoyMode *= -1;
+    if (morphBoyMode === -1) {
+        gameWindow.style.filter = 'invert(40%) sepia(100%) hue-rotate(61deg) brightness(90%) contrast(350%) saturate(50%)';
+        bodyEl.style.backgroundColor = 'rgba(184,185,189,255)';
+    } else if (morphBoyMode === 1) {
+        gameWindow.style.filter = 'none';
+        bodyEl.style.backgroundColor = 'rgba(58, 58, 58,255)';
+    }
+};
 
 /*---event listeners---*/
 
@@ -115,3 +129,5 @@ menuOptionEls.forEach((option) => {
     // menu choices
 // menu hover
 // textbox advance
+// morph boy mode button
+morphBoyModeEl.addEventListener('click', toggleMorphBoyMode);
