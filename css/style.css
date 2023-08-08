@@ -52,6 +52,7 @@ body {
 #morphboy-mode:hover {
     #led {
         color: red;
+        text-shadow: 0 0 20px rgba(255,0,0,1);
     }
 }
 /* end overall document */
