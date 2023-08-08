@@ -81,6 +81,9 @@ const cooper = {
     health: 0
 }
 
+// turn list
+const turns = [turn0, turn1, turn2, turn3, turn4, turn5, turn6];
+
 /*---state variables---*/
 
 // text menu
@@ -131,7 +134,7 @@ const gameWindow = document.getElementById('game-window');
 const bodyEl = document.querySelector('body');
 /*---functions---*/
 
-// init();
+init();
 function init() {
     winner = 0;
     turn = 0;
@@ -166,8 +169,6 @@ function turn1() {
     // listen for action choice
 }
 
-moveChoice = player.attacks[1]
-damageToApply = player.attacks[1].dmg
 // turn 2 - attack animation and flavor text for morpheus' attack
 function turn2() {
     // make textPrinted false
@@ -249,8 +250,13 @@ function turn6() {
 
 function advanceTurn() {
     // check if textPrinted
-    if (!textPrinted && turn != 1)
-    // advance to next turn
+    if (textPrinted && turn != 1 && turn != 6 && winner === 0) {
+        turn += 1;
+        turns[turn]();
+    } else if (textPrinted && turn === 6 && winner === 0) {
+        turn = 1;
+        turns[turn]();
+    } else return;
 }
 
 function handleMoveChoice() {
@@ -292,6 +298,9 @@ function renderMenuEls() {
         option.style.visibility = 'visible'
     }
     textBoxEl.innerText = '';
+    menuSelectorEl.style.visibility = 'hidden';
+    menuSelectorEl.style.gridArea = player.attacks[0].pawLocation;
+    menuSelectorEl.style.justifySelf = 'flex-end';
 }
 
 function toggleMorphBoyMode() {
@@ -365,5 +374,6 @@ function waitForMs(ms) {
     // menu choices
 // menu hover
 // textbox advance
+textBoxEl.addEventListener('click', advanceTurn);
 // morph boy mode button
 morphBoyModeEl.addEventListener('click', toggleMorphBoyMode);
