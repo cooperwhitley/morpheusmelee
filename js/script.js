@@ -5,7 +5,7 @@ const player = {
     attacks: [
         { 
             name: 'BITE', 
-            info: 'MORPHEUS BIT', 
+            info: 'MORPHEUS CHOMPED DOWN ON', 
             pawLocation: '5 / 1 / 6 / 2',
             dmg: 15
         },
@@ -17,7 +17,7 @@ const player = {
         },
         {
             name: 'LUNGE',
-            info: 'MORPHEUS LUNGED AT',
+            info: 'MORPHEUS FLEW ACROSS THE ROOM AND POUNCED ON',
             pawLocation: '5 / 6 / 6 / 7',
             dmg: 20
         },
@@ -35,10 +35,6 @@ const player = {
         'MEOWWWWWWW'
     ]
 };
-const menuOptionLocations = [
-    ['top-left', 'top-right'],
-    ['bottom-left', 'bottom-right']
-];
 // enemy attacks
     // cooper attacks
 const cooper = {
@@ -86,8 +82,6 @@ const turns = [turn0, turn1, turn2, turn3, turn4, turn5, turn6];
 
 /*---state variables---*/
 
-// text menu
-let menu;
 // turn, value 0-6, 0 being initial greeting, then loop combat in 1-6
 let turn;
 // win condition
@@ -142,7 +136,6 @@ init();
 function init() {
     winner = 0;
     turn = 0;
-    menu = 0;
     retryButton.style.visibility = 'hidden';
     for (let item of infoBoxEls) {
         item.style.visibility = 'visible';
@@ -187,6 +180,7 @@ function turn1() {
 function turn2() {
     // make textPrinted false
     textPrinted = false;
+    menuSelectorEl.style.visibility = 'hidden';
     // make textbox visible and menu choices invisible
     renderTextBoxEl();
     // print action text
@@ -203,6 +197,7 @@ function turn2() {
 function turn3() {
     // make textPrinted false
     textPrinted = false;
+    menuSelectorEl.style.visibility = 'hidden';
     // clear text
     renderTextBoxEl();
     // if winner = true print win message, else print reaction text
@@ -221,6 +216,7 @@ function turn3() {
 function turn4() {
     // make textPrinted false
     textPrinted = false;
+    menuSelectorEl.style.visibility = 'hidden';
     renderTextBoxEl();
     // choose random enemy attack
     enemyMoveChoice = enemy.attacks[Math.floor(Math.random() * enemy.attacks.length)]
@@ -234,6 +230,7 @@ function turn4() {
 function turn5() {
     // make textPrinted false
     textPrinted = false;
+    menuSelectorEl.style.visibility = 'hidden';
     renderTextBoxEl();
     // print action text
     let enemyActionText = enemyMoveChoice.info;
@@ -249,6 +246,7 @@ function turn5() {
 function turn6() {
     // make textPrinted false
     textPrinted = false;
+    menuSelectorEl.style.visibility = 'hidden';
     renderTextBoxEl();
     // if winner = true print win message, else print reaction text
     checkWinner();
@@ -375,18 +373,6 @@ async function typeSentence(str, elId) {
         i++
     }
     return;
-}
-
-// delete text fn
-async function deleteSentence(elId) {
-    const sentence = elId.innerText;
-    const letters = sentence.split("");
-    let i = 0;
-    while(letters.length > 0) {
-        await waitForMs(100);
-        letters.pop();
-        document.getElementById(elId).innerText = letters.join("");
-    }
 }
 
 // wait promise constructor
