@@ -77,6 +77,22 @@ const cooper = {
     health: 0
 }
 
+const jordan = {
+    name: 'JORDAN',
+    attacks: [
+        {
+            name: 'YELL',
+            info: 'JORDAN YELLED AT MORPHEUS: LEAVE ME ALONE',
+            dmg: 10
+        }
+    ],
+    greetings: [
+        'HI MORPHEUS'
+    ],
+    pronouns: ['SHE', 'HER', 'HERS'],
+    health: 0
+}
+
 // turn list
 const turns = [turn0, turn1, turn2, turn3, turn4, turn5, turn6];
 
