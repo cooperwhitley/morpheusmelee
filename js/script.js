@@ -174,7 +174,7 @@ function turn0() {
     let randomGreeting = `${enemy.name}: ${enemy.greetings[Math.floor(Math.random() * enemy.greetings.length)]}`
     typeSentence(randomGreeting, textBoxEl)
     // move pawprint to bottom right of menu and only show if textPrinted is true
-    // waitAndRenderSelectorEl(randomGreeting);
+    waitAndRenderSelectorEl(randomGreeting);
 }
 
 // turn 1 - morpheus chooses attack
@@ -206,7 +206,7 @@ function turn2() {
     enemyHealth.value += damageToApply;
     pain(enemySpriteEl);
     typeSentence(actionText, textBoxEl);
-    // waitAndRenderSelectorEl(actionText);
+    waitAndRenderSelectorEl(actionText);
 }
 
 // turn 3 - enemy reaction text to morpheus' attack
@@ -225,7 +225,7 @@ function turn3() {
         reactionText = `${enemy.name}: ${enemy.reactions[Math.floor(Math.random() * enemy.reactions.length)]}`
     }
     typeSentence(reactionText, textBoxEl);
-    // waitAndRenderSelectorEl(reactionText);
+    waitAndRenderSelectorEl(reactionText);
 }
 
 // turn 4 - enemy chooses attack
@@ -239,7 +239,7 @@ function turn4() {
     // print what attack is chosen
     let enemyMoveName = `${enemy.name} USED ${enemyMoveChoice.name}`;
     typeSentence(enemyMoveName, textBoxEl);
-    // waitAndRenderSelectorEl(enemyMoveName);
+    waitAndRenderSelectorEl(enemyMoveName);
 }
 
 // turn 5 - enemy attack animation & text
@@ -255,7 +255,7 @@ function turn5() {
     playerHealth.value -= enemyMoveChoice.dmg;
     pain(playerSpriteEl);
     typeSentence(enemyActionText, textBoxEl);
-    // waitAndRenderSelectorEl(enemyActionText);
+    waitAndRenderSelectorEl(enemyActionText);
 }
 
 // turn 6 - morpheus reaction text to enemy attack
@@ -273,7 +273,7 @@ function turn6() {
         reactionText = `MORPHEUS: ${player.reactions[Math.floor(Math.random() * player.reactions.length)]}`
     }
     typeSentence(reactionText, textBoxEl);
-    // waitAndRenderSelectorEl(reactionText);
+    waitAndRenderSelectorEl(reactionText);
 }
 
 function advanceTurn() {
@@ -369,35 +369,35 @@ async function pain(target) {
 
 // 
 // text print fn
-// async function waitAndRenderSelectorEl(str) {
-//     const timeToWait = (str.length + 1) * 25;
-//     const start = performance.now();
-//     await waitForMs(timeToWait);
-//     textPrinted = true;
-//     menuSelectorEl.style.visibility = 'visible';
-//     menuSelectorEl.style.gridArea = '6 / 10 / 7 / 11';
-//     menuSelectorEl.style.justifySelf = 'center';
-//     const end = performance.now();
-//     console.log(`Wait and Render execution time: ${end - start} ms`);
-//     return;
-// }
+async function waitAndRenderSelectorEl(str) {
+    const timeToWait = (str.length + 1) * 31;
+    let strLength = str.length
+    console.log(`wait and render length = ${strLength}`)
+    const start = performance.now();
+    await waitForMs(timeToWait);
+    textPrinted = true;
+    menuSelectorEl.style.visibility = 'visible';
+    menuSelectorEl.style.gridArea = '6 / 10 / 7 / 11';
+    menuSelectorEl.style.justifySelf = 'center';
+    const end = performance.now();
+    console.log(`Wait and Render execution time: ${end - start} ms, ${(end-start)/ strLength} ms per letter`);
+    return;
+}
 
 async function typeSentence(str, elId) {
     const letters = str.split('');
     let i = 0;
     let typingTarget = elId;
-    // const start = performance.now();
+    let strLength = letters.length
+    console.log(`type sentence length = ${strLength}`)
+    const start = performance.now();
     while (i < letters.length) {
         await waitForMs(25);
         typingTarget.append(letters[i]);
         i++
     }
-    textPrinted = true;
-    menuSelectorEl.style.visibility = 'visible';
-    menuSelectorEl.style.gridArea = '6 / 10 / 7 / 11';
-    menuSelectorEl.style.justifySelf = 'center';
-    // const end = performance.now();
-    // console.log(`Typing execution time: ${end - start} ms`);
+    const end = performance.now();
+    console.log(`Typing execution time: ${end - start} ms, ${(end-start)/ strLength} ms per letter`);
     return;
 }
 
