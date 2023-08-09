@@ -7,25 +7,25 @@ const player = {
             name: 'BITE', 
             info: 'MORPHEUS BIT', 
             pawLocation: '5 / 1 / 6 / 2',
-            dmg: 10
+            dmg: 15
         },
         { 
             name: 'SCRATCH',
             info: 'MORPHEUS SCRATCHED THE SHIT OUT OF',
             pawLocation: '6 / 1 / 7 / 2',
-            dmg: 10
+            dmg: 15
         },
         {
             name: 'LUNGE',
             info: 'MORPHEUS LUNGED AT',
             pawLocation: '5 / 6 / 6 / 7',
-            dmg: 15
+            dmg: 20
         },
         {
             name: 'SWIPE',
-            info: 'MORPHEUS SWIPED AT',
+            info: 'MORPHEUS KNOCKED OVER A CUP WHILE STARING STRAIGHT AT',
             pawLocation: '6 / 6 / 7 / 7',
-            dmg: 5
+            dmg: 15
         }
     ],
     reactions: [
@@ -47,12 +47,12 @@ const cooper = {
         {
             name: 'NERF GUN',
             info: 'COOPER SHOT AT MORPHEUS',
-            dmg: 10
+            dmg: 15
         },
         {
             name: 'PET',
             info: 'COOPER PET MORPHEUS AND SCRATCHED HIM BEHIND THE EAR',
-            dmg: 5
+            dmg: 10
         },
         {
             name: 'GIVE TREAT',
@@ -62,7 +62,7 @@ const cooper = {
         {
             name: 'SHOUT',
             info: 'COOPER YELLED AT MORPHEUS: "QUIT BEING AN ASSHOLE"',
-            dmg: 5
+            dmg: 10
         }
     ],
     greetings: [
@@ -104,10 +104,6 @@ let moveChoice;
 // enemy choice
 let enemy = cooper;
 let enemyMoveChoice;
-
-// health
-enemy.health;
-player.health;
 
 
 /*---cached elements---*/
@@ -151,8 +147,8 @@ function init() {
     for (let item of infoBoxEls) {
         item.style.visibility = 'visible';
     } 
-    enemySpriteEl.visibility = 'visible';
-    playerSpriteEl.visibility = 'visible';
+    enemySpriteEl.style.visibility = 'visible';
+    playerSpriteEl.style.visibility = 'visible';
     player.health = 100;
     enemy.health = 0;
     playerHealth.value = 100;
@@ -290,10 +286,10 @@ function handleMoveChoice(evt) {
 function checkWinner() {
     if (enemy.health >= 100) {
         winner = 1;
-        enemySpriteEl.visibility = 'hidden';
+        enemySpriteEl.style.visibility = 'hidden';
     } else if (player.health <= 0) {
         winner = -1;
-        playerSpriteEl.visibility = 'hidden';
+        playerSpriteEl.style.visibility = 'hidden';
     } else winner = 0;
     if (winner !== 0) {
         retryButton.style.visibility = 'visible';
@@ -346,13 +342,14 @@ function toggleMorphBoyMode() {
 };
 
 async function pain(target) {
-    target.style.animation = 'pain 50ms linear 5';
+    target.style.animation = 'pain 50ms linear 10';
     for (i = 0; i <= 5; i++) {
-    target.style.filter = 'invert(39%) sepia(77%) saturate(5000%) hue-rotate(3deg) brightness(105%) contrast(300%)'
-    await waitForMs(25);
-    target.style.filter = 'none';
-    await waitForMs(25);
+        target.style.filter = 'invert(39%) sepia(77%) saturate(5000%) hue-rotate(3deg) brightness(105%) contrast(300%)'
+        await waitForMs(25);
+        target.style.filter = 'none';
+        await waitForMs(25);
     }
+    target.style.animation = 'none';
     return;
 }
 
@@ -410,6 +407,7 @@ for (let option of menuOptionEls) {
 // textbox advance
 textBoxEl.addEventListener('click', advanceTurn);
 menuEl.addEventListener('click', advanceTurn);
+menuSelectorEl.addEventListener('click', advanceTurn);
 // morph boy mode button
 morphBoyModeEl.addEventListener('click', toggleMorphBoyMode);
 retryButton.addEventListener('click', init);

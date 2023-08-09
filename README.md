@@ -10,6 +10,7 @@ My cat is an asshole. Whose isn't? This is how I think he sees the world when he
 - CSS
 - JavaScript
 - Aseprite
+- Ableton Live
 - Avid Pro Tools
 ## User Stories
 #### Minimum Viable Product
