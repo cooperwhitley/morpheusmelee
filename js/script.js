@@ -69,7 +69,7 @@ const cooper = {
     ],
     reactions: [
         'WHY', 
-        'OUCH!', 
+        'MORPHEUS!', 
         'HEY! WHAT WAS THAT ABOUT', 
         'WHY ARE YOU LIKE THIS'
     ],
