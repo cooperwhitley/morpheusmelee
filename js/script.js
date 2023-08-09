@@ -370,17 +370,12 @@ async function pain(target) {
 // 
 // text print fn
 async function waitAndRenderSelectorEl(str) {
-    const timeToWait = (str.length + 1) * 31;
-    let strLength = str.length
-    console.log(`wait and render length = ${strLength}`)
-    const start = performance.now();
+    const timeToWait = (str.length + 1) * 32;
     await waitForMs(timeToWait);
     textPrinted = true;
     menuSelectorEl.style.visibility = 'visible';
     menuSelectorEl.style.gridArea = '6 / 10 / 7 / 11';
     menuSelectorEl.style.justifySelf = 'center';
-    const end = performance.now();
-    console.log(`Wait and Render execution time: ${end - start} ms, ${(end-start)/ strLength} ms per letter`);
     return;
 }
 
@@ -388,16 +383,11 @@ async function typeSentence(str, elId) {
     const letters = str.split('');
     let i = 0;
     let typingTarget = elId;
-    let strLength = letters.length
-    console.log(`type sentence length = ${strLength}`)
-    const start = performance.now();
     while (i < letters.length) {
         await waitForMs(25);
         typingTarget.append(letters[i]);
         i++
     }
-    const end = performance.now();
-    console.log(`Typing execution time: ${end - start} ms, ${(end-start)/ strLength} ms per letter`);
     return;
 }
 
