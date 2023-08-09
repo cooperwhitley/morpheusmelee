@@ -65,7 +65,7 @@ const cooper = {
         'HI SWEET BOY', 
         'WHATCHA DOIN MORBY', 
         'AWW WASUP ANGEL BOY', 
-        'MORBY!'
+        'HEY MORBY!'
     ],
     reactions: [
         'WHY', 
