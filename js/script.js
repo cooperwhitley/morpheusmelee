@@ -78,7 +78,8 @@ const cooper = {
     select: {
         icon: document.getElementById('cooper'),
         text: document.getElementById('cooper-name')
-    }
+    },
+    sprite: 'src="./assets/sprites/cooper.png"'
 }
 
 const jordan = {
@@ -98,7 +99,8 @@ const jordan = {
     select: {
         icon: document.getElementById('jordan'),
         text: document.getElementById('jordan-name')
-    }
+    },
+    sprite: 'src="./assets/sprites/jordan.png"'
 }
 
 const aly = {
@@ -118,7 +120,8 @@ const aly = {
     select: {
         icon: document.getElementById('aly'),
         text: document.getElementById('aly-name')
-    }
+    },
+    sprite: 'src="./assets/sprites/aly.png"'
 }
 
 const emerson = {
@@ -138,7 +141,8 @@ const emerson = {
     select: {
         icon: document.getElementById('emerson'),
         text: document.getElementById('emerson-name')
-    }
+    },
+    sprite: 'src="./assets/sprites/emerson.png"'
 }
 
 // char list
@@ -162,7 +166,7 @@ let damageToApply;
 let moveChoice;
 
 // enemy choice
-let enemy = cooper;
+let enemy;
 let enemyMoveChoice;
 
 
@@ -170,11 +174,15 @@ let enemyMoveChoice;
 
 
 // character menu background
-
+const selectMenu = document.getElementById('select-menu');
 // char select sprites
+const charSelectSprites = document.querySelectorAll('.char');
 // char select names
+const charSelectNames = document.querySelectorAll('.char-names');
 // char select title
+const charSelectPrompt = document.getElementById('select-menu-msg');
 // char select morph
+const charSelectMorph = document.getElementById('morpheus');
 
 // menu
 const menuEl = document.getElementById('menu');
@@ -189,7 +197,8 @@ const menuSelectorEl = document.getElementById('selecticon');
 const textBoxEl = document.getElementById('text');
 // character sprites
 const playerSpriteEl = document.getElementById('player');
-const enemySpriteEl = document.getElementById('enemy');
+const enemyEl = document.getElementById('enemy');
+const enemySpriteEl = document.getElementById('enemy-sprite');
 // character health
 let playerHealth = document.getElementById('player-healthbar');
 let enemyHealth = document.getElementById('enemy-healthbar');
@@ -206,21 +215,21 @@ const gameWindow = document.getElementById('game-window');
 const bodyEl = document.querySelector('body');
 /*---functions---*/
 
-init();
+// init();
 function init() {
     winner = 0;
-    turn = 0;
+    turn = -1;
     retryButton.style.visibility = 'hidden';
     for (let item of infoBoxEls) {
         item.style.visibility = 'visible';
     } 
-    enemySpriteEl.style.visibility = 'visible';
+    enemyEl.style.visibility = 'visible';
     playerSpriteEl.style.visibility = 'visible';
     player.health = 100;
     enemy.health = 0;
     playerHealth.value = 100;
     enemyHealth.value = 0;
-    turn0();
+    turnNeg1();
 }
 // turn logic
 
@@ -272,7 +281,7 @@ function turn2() {
     // apply and animate damage received
     enemy.health += damageToApply;
     enemyHealth.value += damageToApply;
-    pain(enemySpriteEl);
+    pain(enemyEl);
     typeSentence(actionText, textBoxEl);
     waitAndRenderSelectorEl(actionText);
 }
@@ -357,14 +366,23 @@ function advanceTurn() {
 
 // handle enemy choice
 function handleEnemyChoice(evt) {
-    // check to see if enemy has been defeated
-    // if they have do nothing
-    // if they haven't change enemy value
+    // change enemy value
+    enemy = eval(evt.target.id);
     // change enemy sprite
+    enemySpriteEl.innerHTML = enemy.sprite;
     // advance to turn 0
+    turn = 0;
 }
 
 // handle hover over enemy
+function handleEnemyMouseOver(evt) {
+    evt.target.style.height = '220px';
+    evt.target.style.transition = 'height 300ms ease';
+}
+
+function handleEnemyMouseOut(evt) {
+    evt.target.style.height = '200px';
+}
 
 
 function handleMoveChoice(evt) {
@@ -380,7 +398,7 @@ function handleMoveChoice(evt) {
 function checkWinner() {
     if (enemy.health >= 100) {
         winner = 1;
-        enemySpriteEl.style.visibility = 'hidden';
+        enemyEl.style.visibility = 'hidden';
     } else if (player.health <= 0) {
         winner = -1;
         playerSpriteEl.style.visibility = 'hidden';
@@ -479,11 +497,19 @@ function waitForMs(ms) {
 
 
 /*---event listeners---*/
-
-
 // char choices
-    // click => handleEnemyChoice
-    // hover => handleEnemyHover
+for (let char of chars) {
+    if (char.health === 0) {
+        // click => handleEnemyChoice
+        char.select.icon.addEventListener('click', handleEnemyChoice);
+        // hover => handleEnemyMouseOver
+        char.select.icon.addEventListener('mouseover', handleEnemyMouseOver);
+        char.select.icon.addEventListener('mouseout', handleEnemyMouseOut);
+    } else if (char.health >= 100) {
+        char.select.icon.style.filter = 'grayscale(1)';
+        char.select.text.style.textDecoration = 'line-through';
+    }
+}
 // menu choices
 for (let option of menuOptionEls) {
     option.addEventListener('click', handleMoveChoice);

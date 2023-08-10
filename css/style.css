@@ -109,10 +109,10 @@ body {
 .char > img {
     height: 200px;
 }
-.char > img:hover {
+/* .char > img:hover {
     height: 220px;
     transition: height 300ms ease;
-}
+} */
 .char-names {
     z-index: 6;
     align-self: flex-end;
@@ -130,26 +130,26 @@ body {
     font-size: 75px;
     letter-spacing: 15px;
 }
-#cooper {
+#cooper-div {
     grid-area: 2 / 2 / 4 / 4;
 }
 #cooper-name {
     grid-area: 3 / 2 / 4 / 4;
 }
-#jordan {
+#jordan-div {
     grid-area: 2 / 8 / 4 / 10;
 }
 #jordan-name {
     grid-area: 3 / 8 / 4 / 10;
 }
-#emerson {
+#emerson-div {
     grid-area: 4 / 2 / 6 / 4;
     margin-bottom: 30px;
 }
 #emerson-name {
     grid-area: 5 / 2 / 6 / 4;
 }
-#aly {
+#aly-div {
     grid-area: 4 / 8 / 6 / 10;
 }
 #aly-name {
