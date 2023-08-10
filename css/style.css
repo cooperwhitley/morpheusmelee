@@ -77,9 +77,6 @@ body {
     grid-area: 5 / 1 / 7 / 11;
     z-index: 1;
 }
-.char {
-    visibility: hidden;
-}
 #win-message {
     grid-area: 2 / 4 / 4 / 8;
     z-index: 4;
@@ -96,8 +93,72 @@ body {
 #win-message:hover {
     color: #ccb744;
 }
+#select-menu {
+    grid-area: 1 / 1 / 7 / 11;
+    z-index: 5;
+    /* visibility: hidden */
+}
 /* end basic objects */
-
+/* start char select menu */
+.char {
+    align-self: center;
+    justify-self: center;
+    z-index: 6;
+    /* visibility: hidden; */
+}
+.char > img {
+    height: 200px;
+}
+.char-names {
+    z-index: 6;
+    align-self: flex-end;
+    justify-self: center;
+    font-size: 50px;
+    letter-spacing: 20px;
+    margin-left: 30px;
+    /* visibility: hidden */
+}
+#select-menu-msg {
+    z-index: 6;
+    align-self: center;
+    justify-self: center;
+    grid-area: 1 / 2 / 2 / 10;
+    font-size: 75px;
+    letter-spacing: 15px;
+}
+#cooper {
+    grid-area: 2 / 2 / 4 / 4;
+}
+#cooper-name {
+    grid-area: 3 / 2 / 4 / 4;
+}
+#jordan {
+    grid-area: 2 / 8 / 4 / 10;
+}
+#jordan-name {
+    grid-area: 3 / 8 / 4 / 10;
+}
+#emerson {
+    grid-area: 4 / 2 / 6 / 4;
+    margin-bottom: 30px;
+}
+#emerson-name {
+    grid-area: 5 / 2 / 6 / 4;
+}
+#aly {
+    grid-area: 4 / 8 / 6 / 10;
+}
+#aly-name {
+    grid-area: 5 / 8 / 6 / 10;
+}
+#morpheus {
+    grid-area: 3 / 5 / 5 / 7;
+    align-self: center;
+    justify-self: center;
+    z-index: 6;
+    /* visibility: hidden */
+}
+/* end char select menu */
 /* start menu */
 .menu-items {
     font-size: 50px;
