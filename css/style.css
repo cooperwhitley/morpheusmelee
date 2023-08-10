@@ -104,15 +104,11 @@ body {
     align-self: center;
     justify-self: center;
     z-index: 6;
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 .char > img {
     height: 200px;
 }
-/* .char > img:hover {
-    height: 220px;
-    transition: height 300ms ease;
-} */
 .char-names {
     z-index: 6;
     align-self: flex-end;
@@ -156,7 +152,7 @@ body {
     grid-area: 5 / 8 / 6 / 10;
 }
 #morpheus {
-    grid-area: 3 / 5 / 5 / 7;
+    grid-area: 4 / 5 / 6 / 7;
     align-self: center;
     justify-self: center;
     z-index: 6;

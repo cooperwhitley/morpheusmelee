@@ -7,7 +7,7 @@ const player = {
             name: 'BITE', 
             info: 'MORPHEUS CHOMPED DOWN ON', 
             pawLocation: '5 / 1 / 6 / 2',
-            dmg: 15
+            dmg: 10
         },
         { 
             name: 'SCRATCH',
@@ -79,20 +79,38 @@ const cooper = {
         icon: document.getElementById('cooper'),
         text: document.getElementById('cooper-name')
     },
-    sprite: 'src="./assets/sprites/cooper.png"'
+    sprite: './assets/sprites/cooper.png'
 }
 
 const jordan = {
     name: 'JORDAN',
     attacks: [
         {
-            name: 'YELL',
-            info: 'JORDAN YELLED AT MORPHEUS: LEAVE ME ALONE',
+            name: 'BITE',
+            info: 'JORDAN BIT MORPHEUS???',
             dmg: 10
+        },
+        {
+            name: '',
+            info: '',
+            dmg: ''
+        },
+        {
+            name: '',
+            info: '',
+            dmg: ''
+        },
+        {
+            name: '',
+            info: '',
+            dmg: ''
         }
     ],
     greetings: [
         'HI MORPHEUS'
+    ],
+    reactions: [
+        'OUCH'
     ],
     pronouns: ['SHE', 'HER'],
     health: 0,
@@ -100,20 +118,44 @@ const jordan = {
         icon: document.getElementById('jordan'),
         text: document.getElementById('jordan-name')
     },
-    sprite: 'src="./assets/sprites/jordan.png"'
+    sprite: './assets/sprites/jordan.png'
 }
 
 const aly = {
     name: 'ALY',
     attacks: [
         {
-            name: 'YELL',
-            info: 'ALY YELLED AT MORPHEUS: LEAVE ME ALONE',
+            name: 'PICK UP',
+            info: 'ALY MOVED MORPHEUS SOMEWHERE ELSE',
             dmg: 10
-        }
+        },
+        {
+            name: 'GIVE TREAT',
+            info: 'ALY GAVE MORPHEUS A LITTLE TREAT, LOVE IS THE ANSWER',
+            dmg: 25},
+        {
+            name: 'YELL',
+            info: 'ALY "GO ATTACK SOMEBODY ELSE MORPHEUS"',
+            dmg: 10
+        },
+        {
+            name: 'THREATEN',
+            info: 'ALY RACKED THE NERF GUN MENACINGLY',
+            dmg: 15
+        },
     ],
     greetings: [
-        'HI MORPHEUS'
+        'HI SWEET BOY',
+        'HI HANDSOME',
+        'PERFECT BABY ANGEL HIIII',
+        'MORBY!!!',
+        'MISTER MISTER'
+    ],
+    reactions: [
+        'WHY ARE YOU BEING EVIL',
+        'YOU BITCH',
+        'GET OFF OF ME',
+        'DO NOT ATTACK ME'
     ],
     pronouns: ['THEY', 'THEM'],
     health: 0,
@@ -121,20 +163,35 @@ const aly = {
         icon: document.getElementById('aly'),
         text: document.getElementById('aly-name')
     },
-    sprite: 'src="./assets/sprites/aly.png"'
+    sprite: './assets/sprites/aly.png'
 }
 
 const emerson = {
     name: 'EMERSON',
     attacks: [
         {
-            name: 'YELL',
-            info: 'ALY YELLED AT MORPHEUS: LEAVE ME ALONE',
-            dmg: 10
-        }
+            name: 'DANCE',
+            info: 'EMERSON PICKED UP MORPHEUS AND MADE HIM DO A SILLY LITTLE DANCE',
+            dmg: 15
+        },
+        {
+            name: 'WHACK',
+            info: 'EMERSON WHACKED MORPHEUS WITH ONE OF HIS TOYS',
+            dmg: 15
+        },
+        {
+            name: 'NERF GUN',
+            info: 'EMERSON SHOT AT MORPHEUS',
+            dmg: 15
+        },
+
     ],
     greetings: [
-        'HI MORPHEUS'
+        'MORBY!!!',
+        'WASSUP DUDE'
+    ],
+    reactions: [
+        'OUCH'
     ],
     pronouns: ['HE', 'HIM'],
     health: 0,
@@ -142,7 +199,7 @@ const emerson = {
         icon: document.getElementById('emerson'),
         text: document.getElementById('emerson-name')
     },
-    sprite: 'src="./assets/sprites/emerson.png"'
+    sprite: './assets/sprites/emerson.png'
 }
 
 // char list
@@ -215,7 +272,7 @@ const gameWindow = document.getElementById('game-window');
 const bodyEl = document.querySelector('body');
 /*---functions---*/
 
-// init();
+init();
 function init() {
     winner = 0;
     turn = -1;
@@ -225,10 +282,21 @@ function init() {
     } 
     enemyEl.style.visibility = 'visible';
     playerSpriteEl.style.visibility = 'visible';
-    player.health = 100;
-    enemy.health = 0;
-    playerHealth.value = 100;
-    enemyHealth.value = 0;
+    for (let char of chars) {
+        char.select.icon.removeEventListener('click', handleEnemyChoice);
+        char.select.icon.removeEventListener('mouseover', handleEnemyMouseOver);
+        char.select.icon.removeEventListener('mouseout', handleEnemyMouseOut);
+        if (char.health < 100) {
+            // click => handleEnemyChoice
+            char.select.icon.addEventListener('click', handleEnemyChoice);
+            // hover => handleEnemyMouseOver
+            char.select.icon.addEventListener('mouseover', handleEnemyMouseOver);
+            char.select.icon.addEventListener('mouseout', handleEnemyMouseOut);
+        } else if (char.health >= 100) {
+            char.select.icon.style.filter = 'grayscale(1)';
+            char.select.text.style.textDecoration = 'line-through';
+        }
+    }
     turnNeg1();
 }
 // turn logic
@@ -236,10 +304,15 @@ function init() {
 // turn -1 - player selects target
 function turnNeg1() {
     // add top layer background
-    // loop to populate enemy selection
-        // make visible
-        // check if each enemy has been defeated
-        // grey out if they have
+    selectMenu.style.visibility = 'visible';
+    for (let item of charSelectSprites){
+        item.style.visibility = 'visible';
+    }
+    for (let item of charSelectNames){
+        item.style.visibility = 'visible';
+    }
+    charSelectPrompt.style.visibility = 'visible';
+    charSelectMorph.style.visibility = 'visible';
     // start music loop
 }
 
@@ -247,6 +320,20 @@ function turnNeg1() {
 function turn0() {
     // make textbox visible and menu choices invisible
     renderTextBoxEl();
+    selectMenu.style.visibility = 'hidden';
+    for (let item of charSelectSprites){
+        item.style.visibility = 'hidden';
+    }
+    for (let item of charSelectNames){
+        item.style.visibility = 'hidden';
+    }
+    charSelectPrompt.style.visibility = 'hidden';
+    charSelectMorph.style.visibility = 'hidden';
+    // reset player health and reset enemy health if they were not previously defeated
+    player.health = 100;
+    enemy.health = 0;
+    playerHealth.value = 100;
+    enemyHealth.value = 0;
     // print greeting text
     let randomGreeting = `${enemy.name}: ${enemy.greetings[Math.floor(Math.random() * enemy.greetings.length)]}`
     typeSentence(randomGreeting, textBoxEl)
@@ -369,9 +456,10 @@ function handleEnemyChoice(evt) {
     // change enemy value
     enemy = eval(evt.target.id);
     // change enemy sprite
-    enemySpriteEl.innerHTML = enemy.sprite;
+    enemySpriteEl.setAttribute("src", enemy.sprite);
     // advance to turn 0
     turn = 0;
+    turn0();
 }
 
 // handle hover over enemy
@@ -498,18 +586,7 @@ function waitForMs(ms) {
 
 /*---event listeners---*/
 // char choices
-for (let char of chars) {
-    if (char.health === 0) {
-        // click => handleEnemyChoice
-        char.select.icon.addEventListener('click', handleEnemyChoice);
-        // hover => handleEnemyMouseOver
-        char.select.icon.addEventListener('mouseover', handleEnemyMouseOver);
-        char.select.icon.addEventListener('mouseout', handleEnemyMouseOut);
-    } else if (char.health >= 100) {
-        char.select.icon.style.filter = 'grayscale(1)';
-        char.select.text.style.textDecoration = 'line-through';
-    }
-}
+
 // menu choices
 for (let option of menuOptionEls) {
     option.addEventListener('click', handleMoveChoice);
@@ -521,4 +598,3 @@ menuSelectorEl.addEventListener('click', advanceTurn);
 // morph boy mode button
 morphBoyModeEl.addEventListener('click', toggleMorphBoyMode);
 retryButton.addEventListener('click', init);
-// change retryButton cb to be turnNeg1
