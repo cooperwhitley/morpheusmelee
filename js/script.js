@@ -1,5 +1,5 @@
 /*---constants---*/
-// player attacks
+// player
 const player = {
     name: 'MORPHEUS',
     attacks: [
@@ -35,8 +35,7 @@ const player = {
         'MEOWWWWWWW'
     ]
 };
-// enemy attacks
-    // cooper attacks
+// enemies
 const cooper = {
     name: 'COOPER',
     attacks: [
@@ -222,6 +221,13 @@ const chars = [cooper, jordan, emerson, aly];
 // turn list
 const turns = [turn0, turn1, turn2, turn3, turn4, turn5, turn6];
 
+// music
+const battleMusic = new Audio('./assets/sound/battle.mp3');
+battleMusic.loop = true;
+const victoryMusic = new Audio('./assets/sound/victory.mp3');
+const lossMusic = new Audio('./assets/sound/loss.mp3');
+
+
 /*---state variables---*/
 
 // turn, value 0-6, 0 being initial greeting, then loop combat in 1-6
@@ -334,6 +340,9 @@ function turnNeg1() {
 // turn 0 - enemy greets morpheus
 function turn0() {
     // make textbox visible and menu choices invisible
+    battleMusic.removeEventListener('canplaythrough', playMusic);
+    battleMusic.currentTime = 0;
+    battleMusic.addEventListener('canplaythrough', playMusic);
     renderTextBoxEl();
     selectMenu.style.visibility = 'hidden';
     for (let item of charSelectSprites){
@@ -502,9 +511,17 @@ function checkWinner() {
     if (enemy.health >= 100) {
         winner = 1;
         enemyEl.style.visibility = 'hidden';
+        battleMusic.pause();
+        victoryMusic.removeEventListener('canplaythrough', playMusic);
+        victoryMusic.currentTime = 0;
+        victoryMusic.addEventListener('canplaythrough', playMusic);
     } else if (player.health <= 0) {
         winner = -1;
         playerSpriteEl.style.visibility = 'hidden';
+        battleMusic.pause();
+        lossMusic.removeEventListener('canplaythrough', playMusic);
+        lossMusic.currentTime = 0;
+        lossMusic.addEventListener('canplaythrough', playMusic);
     } else winner = 0;
     if (winner !== 0) {
         retryButton.style.visibility = 'visible';
@@ -568,7 +585,11 @@ async function pain(target) {
     return;
 }
 
-// 
+// music
+
+function playMusic(evt) {
+    evt.target.play();
+}
 // text print fn
 async function waitAndRenderSelectorEl(str) {
     const timeToWait = (str.length + 1) * 32;

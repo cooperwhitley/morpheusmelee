@@ -96,7 +96,6 @@ body {
 #select-menu {
     grid-area: 1 / 1 / 7 / 11;
     z-index: 5;
-    /* visibility: hidden */
 }
 /* end basic objects */
 /* start char select menu */
@@ -116,7 +115,6 @@ body {
     font-size: 50px;
     letter-spacing: 20px;
     margin-left: 30px;
-    /* visibility: hidden */
 }
 #select-menu-msg {
     z-index: 6;
@@ -156,7 +154,6 @@ body {
     align-self: center;
     justify-self: center;
     z-index: 6;
-    /* visibility: hidden */
 }
 /* end char select menu */
 /* start menu */
