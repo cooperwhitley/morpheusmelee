@@ -93,6 +93,38 @@ const jordan = {
     health: 0
 }
 
+const aly = {
+    name: 'ALY',
+    attacks: [
+        {
+            name: 'YELL',
+            info: 'ALY YELLED AT MORPHEUS: LEAVE ME ALONE',
+            dmg: 10
+        }
+    ],
+    greetings: [
+        'HI MORPHEUS'
+    ],
+    pronouns: ['THEY', 'THEM', 'THEIRS'],
+    health: 0
+}
+
+const emerson = {
+    name: 'EMERSON',
+    attacks: [
+        {
+            name: 'YELL',
+            info: 'ALY YELLED AT MORPHEUS: LEAVE ME ALONE',
+            dmg: 10
+        }
+    ],
+    greetings: [
+        'HI MORPHEUS'
+    ],
+    pronouns: ['HE', 'HIM', 'HIS'],
+    health: 0
+}
+
 // turn list
 const turns = [turn0, turn1, turn2, turn3, turn4, turn5, turn6];
 
@@ -117,6 +149,11 @@ let enemyMoveChoice;
 
 
 /*---cached elements---*/
+
+
+// character menu background
+
+// char select sprites
 
 // menu
 const menuEl = document.getElementById('menu');
@@ -165,6 +202,16 @@ function init() {
     turn0();
 }
 // turn logic
+
+// turn -1 - player selects target
+function turnNeg1() {
+    // add top layer background
+    // loop to populate enemy selection
+        // make visible
+        // check if each enemy has been defeated
+        // grey out if they have
+    // start music loop
+}
 
 // turn 0 - enemy greets morpheus
 function turn0() {
@@ -287,6 +334,18 @@ function advanceTurn() {
     } else return;
 }
 
+// handle enemy choice
+function handleEnemyChoice(evt) {
+    // check to see if enemy has been defeated
+    // if they have do nothing
+    // if they haven't change enemy value
+    // change enemy sprite
+    // advance to turn 0
+}
+
+// handle hover over enemy
+
+
 function handleMoveChoice(evt) {
     let evtId = evt.target.getAttribute('id');
     let evtIdArr = evtId.split('')
@@ -401,11 +460,13 @@ function waitForMs(ms) {
 /*---event listeners---*/
 
 
+// char choices
+    // click => handleEnemyChoice
+    // hover => handleEnemyHover
 // menu choices
 for (let option of menuOptionEls) {
     option.addEventListener('click', handleMoveChoice);
 }
-// menu hover
 // textbox advance
 textBoxEl.addEventListener('click', advanceTurn);
 menuEl.addEventListener('click', advanceTurn);
@@ -413,3 +474,4 @@ menuSelectorEl.addEventListener('click', advanceTurn);
 // morph boy mode button
 morphBoyModeEl.addEventListener('click', toggleMorphBoyMode);
 retryButton.addEventListener('click', init);
+// change retryButton cb to be turnNeg1
