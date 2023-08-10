@@ -7,25 +7,29 @@ const player = {
             name: 'BITE', 
             info: 'MORPHEUS CHOMPED DOWN ON', 
             pawLocation: '5 / 1 / 6 / 2',
-            dmg: 10
+            dmg: 10,
+            sprite: './assets/sprites/bite.png'
         },
         { 
             name: 'SCRATCH',
             info: 'MORPHEUS SCRATCHED THE SHIT OUT OF',
             pawLocation: '6 / 1 / 7 / 2',
-            dmg: 15
+            dmg: 15,
+            sprite: './assets/sprites/scratch.png'
         },
         {
             name: 'LUNGE',
             info: 'MORPHEUS FLEW ACROSS THE ROOM AND POUNCED ON',
             pawLocation: '5 / 6 / 6 / 7',
-            dmg: 20
+            dmg: 20,
+            sprite: './assets/sprites/lunge.png'
         },
         {
             name: 'SWIPE',
             info: 'MORPHEUS KNOCKED OVER A CUP WHILE STARING STRAIGHT AT',
             pawLocation: '6 / 6 / 7 / 7',
-            dmg: 15
+            dmg: 15,
+            sprite: './assets/sprites/swipe.png'
         }
     ],
     reactions: [
@@ -591,6 +595,17 @@ async function pain(target) {
     }
     target.style.animation = 'none';
     return;
+}
+
+async function attackAnimation(target) {
+    // add attack animation
+    // await animation time
+    // remove attack animation
+}
+
+async function playerAttackSprite() {
+    // pass move selection
+    // change image for attack sprite
 }
 
 // music
