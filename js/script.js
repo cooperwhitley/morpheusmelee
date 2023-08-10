@@ -91,26 +91,31 @@ const jordan = {
             dmg: 10
         },
         {
-            name: '',
-            info: '',
-            dmg: ''
+            name: 'SCREAM',
+            info: 'JORDAN SCREAMED "AAAAAAAHH"',
+            dmg: 15
         },
         {
-            name: '',
-            info: '',
-            dmg: ''
+            name: 'BREATHE WEIRD',
+            info: 'JORDAN RAPIDLY INAHLED AND EXHALED REALLY LOUDLY',
+            dmg: 20
         },
         {
-            name: '',
-            info: '',
-            dmg: ''
+            name: 'PICK UP',
+            info: 'JORDAN PICKED UP MORPHEUS AND SWISHED HIM AROUND WHILE SINGING A LITTLE SONG',
+            dmg: 15
         }
     ],
     greetings: [
-        'HI MORPHEUS'
+        'HAVE YOU SEEN THE MORPHIN MAN',
+        '*WHISTLES*',
+        'WASSUP MARCUS'
     ],
     reactions: [
-        'OUCH'
+        'HEY!!',
+        'QUIT IT',
+        'GRRRR',
+        'STOP IT MORPH'
     ],
     pronouns: ['SHE', 'HER'],
     health: 0,
@@ -184,14 +189,24 @@ const emerson = {
             info: 'EMERSON SHOT AT MORPHEUS',
             dmg: 15
         },
-
+        {
+            name: 'PET',
+            info: 'EMERSON PET MORPHEUS SO GOOD',
+            dmg: 15
+        }
     ],
     greetings: [
         'MORBY!!!',
-        'WASSUP DUDE'
+        'WASSUP DUDE',
+        'HEY BUBBA',
+        'COME ERE!',
+        'PSPSPSPSPSPS'
     ],
     reactions: [
-        'OUCH'
+        'OW YOU BITCH',
+        "WHERE'S THE NERF GUN",
+        "YOU'RE BEING A LITTLE JERK",
+        'STOP IT'
     ],
     pronouns: ['HE', 'HIM'],
     health: 0,
