@@ -109,6 +109,10 @@ body {
 .char > img {
     height: 200px;
 }
+.char > img:hover {
+    height: 220px;
+    transition: height 300ms ease;
+}
 .char-names {
     z-index: 6;
     align-self: flex-end;

@@ -73,8 +73,12 @@ const cooper = {
         'HEY! WHAT WAS THAT ABOUT', 
         'WHY ARE YOU LIKE THIS'
     ],
-    pronouns: ['HE', 'HIM', 'HIS'],
-    health: 0
+    pronouns: ['HE', 'HIM'],
+    health: 0,
+    select: {
+        icon: document.getElementById('cooper'),
+        text: document.getElementById('cooper-name')
+    }
 }
 
 const jordan = {
@@ -89,8 +93,12 @@ const jordan = {
     greetings: [
         'HI MORPHEUS'
     ],
-    pronouns: ['SHE', 'HER', 'HERS'],
-    health: 0
+    pronouns: ['SHE', 'HER'],
+    health: 0,
+    select: {
+        icon: document.getElementById('jordan'),
+        text: document.getElementById('jordan-name')
+    }
 }
 
 const aly = {
@@ -105,8 +113,12 @@ const aly = {
     greetings: [
         'HI MORPHEUS'
     ],
-    pronouns: ['THEY', 'THEM', 'THEIRS'],
-    health: 0
+    pronouns: ['THEY', 'THEM'],
+    health: 0,
+    select: {
+        icon: document.getElementById('aly'),
+        text: document.getElementById('aly-name')
+    }
 }
 
 const emerson = {
@@ -121,10 +133,16 @@ const emerson = {
     greetings: [
         'HI MORPHEUS'
     ],
-    pronouns: ['HE', 'HIM', 'HIS'],
-    health: 0
+    pronouns: ['HE', 'HIM'],
+    health: 0,
+    select: {
+        icon: document.getElementById('emerson'),
+        text: document.getElementById('emerson-name')
+    }
 }
 
+// char list
+const chars = [cooper, jordan, emerson, aly];
 // turn list
 const turns = [turn0, turn1, turn2, turn3, turn4, turn5, turn6];
 
@@ -154,6 +172,9 @@ let enemyMoveChoice;
 // character menu background
 
 // char select sprites
+// char select names
+// char select title
+// char select morph
 
 // menu
 const menuEl = document.getElementById('menu');
