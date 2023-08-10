@@ -224,9 +224,11 @@ const turns = [turn0, turn1, turn2, turn3, turn4, turn5, turn6];
 // music
 const battleMusic = new Audio('./assets/sound/battle.mp3');
 battleMusic.loop = true;
+battleMusic.volume = 0.5;
 const victoryMusic = new Audio('./assets/sound/victory.mp3');
+victoryMusic.volume = 0.5;
 const lossMusic = new Audio('./assets/sound/loss.mp3');
-
+lossMusic.volume = 0.5;
 
 /*---state variables---*/
 
@@ -291,6 +293,8 @@ let retryButton = document.getElementById('win-message');
 const morphBoyModeEl = document.getElementById('morphboy-mode');
 const gameWindow = document.getElementById('game-window');
 const bodyEl = document.querySelector('body');
+// title
+const gameTitleEl = document.getElementById('title'); 
 /*---functions---*/
 
 init();
@@ -567,9 +571,13 @@ function toggleMorphBoyMode() {
     if (morphBoyMode === -1) {
         gameWindow.style.filter = 'invert(40%) sepia(100%) hue-rotate(61deg) brightness(90%) contrast(350%) saturate(50%)';
         bodyEl.style.backgroundColor = 'rgba(184,185,189,255)';
+        gameTitleEl.style.backgroundColor = 'rgba(0,0,0,0)';
+        gameTitleEl.style.color = 'rgba(0,4,125,255)'
     } else if (morphBoyMode === 1) {
         gameWindow.style.filter = 'none';
         bodyEl.style.backgroundColor = 'rgba(58, 58, 58,255)';
+        gameTitleEl.style.backgroundColor = '#23232b';
+        gameTitleEl.style.color = '#ffffff'
     }
 };
 
