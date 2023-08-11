@@ -253,19 +253,20 @@ const turns = [turn0, turn1, turn2, turn3, turn4, turn5, turn6];
 // music
 const selectMusic = new Audio('./assets/sound/music/charselect.mp3');
 selectMusic.loop = true;
-selectMusic.volume = 0.5;
+selectMusic.volume = 0.25;
 const battleMusic = new Audio('./assets/sound/music/battle.mp3');
 battleMusic.loop = true;
-battleMusic.volume = 0.5;
+battleMusic.volume = 0.25;
 const victoryMusic = new Audio('./assets/sound/music/victory.mp3');
-victoryMusic.volume = 0.5;
+victoryMusic.volume = 0.25;
 const lossMusic = new Audio('./assets/sound/music/loss.mp3');
-lossMusic.volume = 0.5;
+lossMusic.volume = 0.25;
 
 // sfx
 const attackSounds = [hit0, hit1, hit2, hit3, hit4, hit5, hit6, hit7];
 for (i = 0; i < attackSounds.length; i++) {
     attackSounds[i] = new Audio(`./assets/sound/sfx/hit${i}.mp3`);
+    attackSounds[i].volume = .60;
 }
 // char sfx
 for (let obj of chars) {
@@ -273,13 +274,12 @@ for (let obj of chars) {
         obj.sounds.pain[i] = new Audio(`./assets/sound/${obj.name}/pain${i}.mp3`)
     }
     for (i = 0; i < obj.sounds.speech.length; i++) {
-        obj.sounds.pain[i] = new Audio(`./assets/sound/${obj.name}/speech${i}.mp3`)
+        obj.sounds.speech[i] = new Audio(`./assets/sound/${obj.name}/speech${i}.mp3`)
     }
 }
 for (i = 0; i < player.sounds.length; i++) {
-    player.sounds[i] = new Audio(`.assets/sound/morby/morby${i}.mp3`)
+    player.sounds[i] = new Audio(`./assets/sound/morby/morby${i}.mp3`)
 }
-jordan.sounds.speech[1].addEventListener('canplaythrough', playMusic);
 
 /*---state variables---*/
 
@@ -422,6 +422,7 @@ function turn0() {
     typeSentence(randomGreeting, textBoxEl)
     // move pawprint to bottom right of menu and only show if textPrinted is true
     waitAndRenderSelectorEl(randomGreeting);
+    pickRandomSound(enemy.sounds.speech);
 }
 
 // turn 1 - morpheus chooses attack
@@ -454,6 +455,9 @@ function turn2() {
     pain(enemyEl);
     typeSentence(actionText, textBoxEl);
     waitAndRenderSelectorEl(actionText);
+    // play random attack sound
+    pickRandomSound(attackSounds);
+    pickRandomSound(enemy.sounds.pain);
 }
 
 // turn 3 - enemy reaction text to morpheus' attack
@@ -469,7 +473,8 @@ function turn3() {
     if (winner === 1) {
         reactionText = `${enemy.name} GOT SO PISSED OFF THAT ${enemy.pronouns[0]} LEFT. YOU WIN?`
     } else if (winner === 0){
-        reactionText = `${enemy.name}: ${enemy.reactions[Math.floor(Math.random() * enemy.reactions.length)]}`
+        reactionText = `${enemy.name}: ${enemy.reactions[Math.floor(Math.random() * enemy.reactions.length)]}`;
+        pickRandomSound(enemy.sounds.speech);
     }
     typeSentence(reactionText, textBoxEl);
     waitAndRenderSelectorEl(reactionText);
@@ -503,6 +508,7 @@ function turn5() {
     pain(playerSpriteEl);
     typeSentence(enemyActionText, textBoxEl);
     waitAndRenderSelectorEl(enemyActionText);
+    pickRandomSound(attackSounds);
 }
 
 // turn 6 - morpheus reaction text to enemy attack
@@ -518,6 +524,7 @@ function turn6() {
         reactionText = `MORPHEUS IS NO LONGER EXCITED AND IS GONNA TAKE A NAP.`
     } else if (winner === 0){
         reactionText = `MORPHEUS: ${player.reactions[Math.floor(Math.random() * player.reactions.length)]}`
+        pickRandomSound(player.sounds);
     }
     typeSentence(reactionText, textBoxEl);
     waitAndRenderSelectorEl(reactionText);
@@ -648,21 +655,26 @@ async function pain(target) {
     return;
 }
 
-async function attackAnimation(target) {
+// async function attackAnimation(target) {
     // add attack animation
     // await animation time
     // remove attack animation
-}
+// }
 
-async function playerAttackSprite() {
+// async function playerAttackSprite() {
     // pass move selection
     // change image for attack sprite
-}
+// }
 
 // sound
 
 function playMusic(evt) {
     evt.target.play();
+}
+
+function pickRandomSound(soundArr) {
+    let randomInt = Math.abs((Math.floor(Math.random() * soundArr.length)) - 1);
+    soundArr[randomInt].play();
 }
 // text print fn
 async function waitAndRenderSelectorEl(str) {
