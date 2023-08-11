@@ -1,4 +1,14 @@
 /*---constants---*/
+
+
+// with great shame I am declaring all of my sound variables up here bc i can't figure out a better way to do it bc it's late and i'm tired
+// sfx variable declarations
+let morphSound0, morphSound1, morphSound2;
+let hit0, hit1, hit2, hit3, hit4, hit5, hit6, hit7;
+let cPain0, cPain1, cPain2, cSpeech0, cSpeech1, cSpeech2, cSpeech3;
+let jPain0, jPain1, jPain2, jSpeech0, jSpeech1, jSpeech2;
+let aPain0, aPain1, aPain2, aSpeech0, aSpeech1, aSpeech2, aSpeech3;
+let ePain0, ePain1, ePain2, eSpeech0, eSpeech1, eSpeech2, eSpeech3;
 // player
 const player = {
     name: 'MORPHEUS',
@@ -37,7 +47,8 @@ const player = {
         'MROW', 
         'MROWOW', 
         'MEOWWWWWWW'
-    ]
+    ],
+    sounds: [morphSound0, morphSound1, morphSound2]
 };
 // enemies
 const cooper = {
@@ -82,7 +93,11 @@ const cooper = {
         icon: document.getElementById('cooper'),
         text: document.getElementById('cooper-name')
     },
-    sprite: './assets/sprites/cooper.png'
+    sprite: './assets/sprites/cooper.png',
+    sounds: {
+        pain: [cPain0, cPain1, cPain2],
+        speech: [cSpeech0, cSpeech1, cSpeech2, cSpeech3]
+    }
 }
 
 const jordan = {
@@ -126,7 +141,11 @@ const jordan = {
         icon: document.getElementById('jordan'),
         text: document.getElementById('jordan-name')
     },
-    sprite: './assets/sprites/jordan.png'
+    sprite: './assets/sprites/jordan.png',
+    sounds: {
+        pain: [jPain0, jPain1, jPain2],
+        speech: [jSpeech0, jSpeech1, jSpeech2]
+    }
 }
 
 const aly = {
@@ -170,7 +189,11 @@ const aly = {
         icon: document.getElementById('aly'),
         text: document.getElementById('aly-name')
     },
-    sprite: './assets/sprites/aly.png'
+    sprite: './assets/sprites/aly.png',
+    sounds: {
+        pain: [aPain0, aPain1, aPain2],
+        speech: [aSpeech0, aSpeech1, aSpeech2, aSpeech3]
+    }
 }
 
 const emerson = {
@@ -215,7 +238,11 @@ const emerson = {
         icon: document.getElementById('emerson'),
         text: document.getElementById('emerson-name')
     },
-    sprite: './assets/sprites/emerson.png'
+    sprite: './assets/sprites/emerson.png',
+    sounds: {
+        pain: [ePain0, ePain1, ePain2],
+        speech: [eSpeech0, eSpeech1, eSpeech2, eSpeech3]
+    }
 }
 
 // char list
@@ -223,22 +250,36 @@ const chars = [cooper, jordan, emerson, aly];
 // turn list
 const turns = [turn0, turn1, turn2, turn3, turn4, turn5, turn6];
 
-const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-const letterAudios = {};
-// use for loop to create 26 new audio variables named sound(letter).
-for (i = 0; i < 26; i++) {
-    
-} 
-console.log(letterAudios);
-
 // music
-const battleMusic = new Audio('./assets/sound/battle.mp3');
+const selectMusic = new Audio('./assets/sound/music/charselect.mp3');
+selectMusic.loop = true;
+selectMusic.volume = 0.5;
+const battleMusic = new Audio('./assets/sound/music/battle.mp3');
 battleMusic.loop = true;
 battleMusic.volume = 0.5;
-const victoryMusic = new Audio('./assets/sound/victory.mp3');
+const victoryMusic = new Audio('./assets/sound/music/victory.mp3');
 victoryMusic.volume = 0.5;
-const lossMusic = new Audio('./assets/sound/loss.mp3');
+const lossMusic = new Audio('./assets/sound/music/loss.mp3');
 lossMusic.volume = 0.5;
+
+// sfx
+const attackSounds = [hit0, hit1, hit2, hit3, hit4, hit5, hit6, hit7];
+for (i = 0; i < attackSounds.length; i++) {
+    attackSounds[i] = new Audio(`./assets/sound/sfx/hit${i}.mp3`);
+}
+// char sfx
+for (let obj of chars) {
+    for (i = 0; i < obj.sounds.pain.length; i++) {
+        obj.sounds.pain[i] = new Audio(`./assets/sound/${obj.name}/pain${i}.mp3`)
+    }
+    for (i = 0; i < obj.sounds.speech.length; i++) {
+        obj.sounds.pain[i] = new Audio(`./assets/sound/${obj.name}/speech${i}.mp3`)
+    }
+}
+for (i = 0; i < player.sounds.length; i++) {
+    player.sounds[i] = new Audio(`.assets/sound/morby/morby${i}.mp3`)
+}
+jordan.sounds.speech[1].addEventListener('canplaythrough', playMusic);
 
 /*---state variables---*/
 
@@ -339,6 +380,9 @@ function init() {
 // turn -1 - player selects target
 function turnNeg1() {
     // add top layer background
+    selectMusic.removeEventListener('canplaythrough', playMusic);
+    selectMusic.currentTime = 0;
+    selectMusic.addEventListener('canplaythrough', playMusic);
     selectMenu.style.visibility = 'visible';
     for (let item of charSelectSprites){
         item.style.visibility = 'visible';
@@ -354,6 +398,7 @@ function turnNeg1() {
 // turn 0 - enemy greets morpheus
 function turn0() {
     // make textbox visible and menu choices invisible
+    selectMusic.pause();
     battleMusic.removeEventListener('canplaythrough', playMusic);
     battleMusic.currentTime = 0;
     battleMusic.addEventListener('canplaythrough', playMusic);
@@ -614,7 +659,7 @@ async function playerAttackSprite() {
     // change image for attack sprite
 }
 
-// music
+// sound
 
 function playMusic(evt) {
     evt.target.play();
