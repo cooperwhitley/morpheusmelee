@@ -13,10 +13,10 @@ My cat is an asshole. Whose isn't? This is how I think he sees the world when he
 - Ableton Live
 - Avid Pro Tools
 #### Credits
-game design & art: Cooper Whitley
-composing: Emerson Hibbs
-voice acting: Cooper Whitley, Emerson Hibbs, Aly Moore, Jordan Tibbs
-cat sound effects (morby was too shy, even though he's normally loud): free license from mixkit.co
+- game design & art: Cooper Whitley
+- composing: Emerson Hibbs
+- voice acting: Cooper Whitley, Emerson Hibbs, Aly Moore, Jordan Tibbs
+- cat sound effects (morby was too shy, even though he's normally loud): free license from mixkit.co
 ## User Stories
 #### Minimum Viable Product
 As a user...
