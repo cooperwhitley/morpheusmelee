@@ -346,6 +346,9 @@ const gameWindow = document.getElementById('game-window');
 const bodyEl = document.querySelector('body');
 // title
 const gameTitleEl = document.getElementById('title'); 
+// attack sprite div
+const atkSpriteDiv = document.getElementById('attack');
+const atkSpriteEl = document.getElementById('attack-sprite');
 /*---functions---*/
 
 init();
@@ -429,6 +432,10 @@ function turn0() {
 function turn1() {
     // make textbox invisible and menu choices visible
     renderMenuEls();
+    // remove attack sprite animation & choice
+    atkSpriteDiv.style.animation = "none";
+    atkSpriteDiv.style.animationFillMode = "none";
+    atkSpriteEl.setAttribute("src", "none");
     // move pawprint based on highlighted menu selection
     // deploy action titles to menu option divs and add hover icon
     menuOptionEls.forEach((option) => {
@@ -453,6 +460,9 @@ function turn2() {
     enemy.health += damageToApply;
     enemyHealth.value += damageToApply;
     pain(enemyEl);
+    // play attack sprite animation
+    atkSpriteDiv.style.animation = "attackAnimate .6s linear";
+    atkSpriteDiv.style.animationFillMode = "forwards";
     typeSentence(actionText, textBoxEl);
     waitAndRenderSelectorEl(actionText);
     // play random attack sound
@@ -569,6 +579,7 @@ function handleMoveChoice(evt) {
     attackId = parseInt(evtIdArr[evtIdArr.length - 1]);
     moveChoice = player.attacks[attackId];
     damageToApply = moveChoice.dmg;
+    atkSpriteEl.setAttribute("src", moveChoice.sprite);
     turn += 1;
     turns[turn]();
 }

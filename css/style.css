@@ -123,6 +123,13 @@ body {
     grid-area: 1 / 1 / 7 / 11;
     z-index: 5;
 }
+#attack {
+    grid-area: 2 / 4 / 5 / 9;
+    z-index: 5;
+    align-self: flex-end;
+    justify-self: flex-start;
+    visibility: hidden;
+}
 /* end basic objects */
 /* start char select menu */
 .char {
@@ -229,18 +236,6 @@ body {
     height: 40px;
     animation: fadeInOut 1.5s linear infinite;
 }
-    /* animate fade on pawprint indicator */
-@keyframes fadeInOut {
-    0%, 100% {
-        opacity: 100%;
-    }
-    25%, 75% {
-        opacity: 90%
-    }
-    50% {
-        opacity: 0%;
-    }
-}
 /* end menu */
 
 /* start info boxes */
@@ -279,18 +274,10 @@ body {
     margin-top: -35px;
     font-size: 30px;
 }
-    /* animate infoboxes to bounce */
-@keyframes upAndDown {
-    0%, 100% {
-        margin-bottom: 0;
-    }
-    50% {
-        margin-bottom: 20px;
-    }
-}
 /* end info boxes */
 
-/* start misc animations */
+/* start  animations */
+/* pain animation */
 @keyframes pain {
     0%, 50%, 100% {
         margin-left: 0;
@@ -305,4 +292,54 @@ body {
         margin-right: 20px;
     }
 }
-/* end misc animations */
+
+/* animate fade on pawprint indicator */
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 100%;
+    }
+    25%, 75% {
+        opacity: 90%
+    }
+    50% {
+        opacity: 0%;
+}
+}
+/* animate infoboxes to bounce */
+@keyframes upAndDown {
+    0%, 100% {
+        margin-bottom: 0;
+    }
+    50% {
+        margin-bottom: 20px;
+    }
+}
+/* animate attack sprite */
+@keyframes attackAnimate {
+    0% {
+        margin-left: 0;
+        margin-bottom: 0;
+        opacity: 0;
+        visibility: visible;
+    }
+    5% {
+        opacity: 1;
+        margin-left: 15px;
+        margin-bottom: 15px;
+    }
+    30% {
+        margin-left: 40px;
+        margin-bottom: 30px;
+    } 
+    80% {
+        margin-left: 150px;
+        margin-bottom: 90px;
+        opacity: 1;
+    }
+    100% {
+        margin-left: 200px;
+        margin-bottom: 50px;
+        opacity: 0;
+        visibility: hidden;
+    }
+}
