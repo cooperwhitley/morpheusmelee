@@ -12,6 +12,10 @@ My cat is an asshole. Whose isn't? This is how I think he sees the world when he
 - Aseprite
 - Ableton Live
 - Avid Pro Tools
+#### Credits
+game design & art: Cooper Whitley
+composing: Emerson Hibbs
+voice acting: Cooper Whitley, Emerson Hibbs, Aly Moore, Jordan Tibbs
 ## User Stories
 #### Minimum Viable Product
 As a user...
