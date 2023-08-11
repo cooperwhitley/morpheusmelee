@@ -60,12 +60,12 @@ const cooper = {
         },
         {
             name: 'SHOUT',
-            info: 'COOPER YELLED AT MORPHEUS: "QUIT BEING AN ASSHOLE"',
+            info: 'COOPER YELLED AT MORPHEUS',
             dmg: 10
         }
     ],
     greetings: [
-        'HI SWEET BOY', 
+        'MY BOY!', 
         'WHATCHA DOIN MORBY', 
         'AWW WASUP ANGEL BOY', 
         'HEY MORBY!'
@@ -143,7 +143,7 @@ const aly = {
             dmg: 25},
         {
             name: 'YELL',
-            info: 'ALY "GO ATTACK SOMEBODY ELSE MORPHEUS"',
+            info: 'ALY YELLED AT MORPHEUS',
             dmg: 10
         },
         {
@@ -156,7 +156,6 @@ const aly = {
         'HI SWEET BOY',
         'HI HANDSOME',
         'PERFECT BABY ANGEL HIIII',
-        'MORBY!!!',
         'MISTER MISTER'
     ],
     reactions: [
@@ -200,7 +199,6 @@ const emerson = {
     ],
     greetings: [
         'MORBY!!!',
-        'WASSUP DUDE',
         'HEY BUBBA',
         'COME ERE!',
         'PSPSPSPSPSPS'
@@ -224,6 +222,14 @@ const emerson = {
 const chars = [cooper, jordan, emerson, aly];
 // turn list
 const turns = [turn0, turn1, turn2, turn3, turn4, turn5, turn6];
+
+const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+const letterAudios = {};
+// use for loop to create 26 new audio variables named sound(letter).
+for (i = 0; i < 26; i++) {
+    
+} 
+console.log(letterAudios);
 
 // music
 const battleMusic = new Audio('./assets/sound/battle.mp3');
@@ -630,6 +636,7 @@ async function typeSentence(str, elId) {
     let typingTarget = elId;
     while (i < letters.length) {
         await waitForMs(25);
+        // 
         typingTarget.append(letters[i]);
         i++
     }
