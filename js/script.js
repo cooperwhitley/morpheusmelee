@@ -1,5 +1,15 @@
 /*---constants---*/
-// player attacks
+
+
+// with great shame I am declaring all of my sound variables up here bc i can't figure out a better way to do it bc it's late and i'm tired
+// sfx variable declarations
+let morphSound0, morphSound1, morphSound2;
+let hit0, hit1, hit2, hit3, hit4, hit5, hit6, hit7;
+let cPain0, cPain1, cPain2, cSpeech0, cSpeech1, cSpeech2, cSpeech3;
+let jPain0, jPain1, jPain2, jSpeech0, jSpeech1, jSpeech2;
+let aPain0, aPain1, aPain2, aSpeech0, aSpeech1, aSpeech2, aSpeech3;
+let ePain0, ePain1, ePain2, eSpeech0, eSpeech1, eSpeech2, eSpeech3;
+// player
 const player = {
     name: 'MORPHEUS',
     attacks: [
@@ -7,25 +17,29 @@ const player = {
             name: 'BITE', 
             info: 'MORPHEUS CHOMPED DOWN ON', 
             pawLocation: '5 / 1 / 6 / 2',
-            dmg: 15
+            dmg: 10,
+            sprite: './assets/sprites/bite.png'
         },
         { 
             name: 'SCRATCH',
             info: 'MORPHEUS SCRATCHED THE SHIT OUT OF',
             pawLocation: '6 / 1 / 7 / 2',
-            dmg: 15
+            dmg: 15,
+            sprite: './assets/sprites/scratch.png'
         },
         {
             name: 'LUNGE',
             info: 'MORPHEUS FLEW ACROSS THE ROOM AND POUNCED ON',
             pawLocation: '5 / 6 / 6 / 7',
-            dmg: 20
+            dmg: 20,
+            sprite: './assets/sprites/lunge.png'
         },
         {
             name: 'SWIPE',
             info: 'MORPHEUS KNOCKED OVER A CUP WHILE STARING STRAIGHT AT',
             pawLocation: '6 / 6 / 7 / 7',
-            dmg: 15
+            dmg: 15,
+            sprite: './assets/sprites/swipe.png'
         }
     ],
     reactions: [
@@ -33,10 +47,10 @@ const player = {
         'MROW', 
         'MROWOW', 
         'MEOWWWWWWW'
-    ]
+    ],
+    sounds: [morphSound0, morphSound1, morphSound2]
 };
-// enemy attacks
-    // cooper attacks
+// enemies
 const cooper = {
     name: 'COOPER',
     attacks: [
@@ -57,12 +71,12 @@ const cooper = {
         },
         {
             name: 'SHOUT',
-            info: 'COOPER YELLED AT MORPHEUS: "QUIT BEING AN ASSHOLE"',
+            info: 'COOPER YELLED AT MORPHEUS',
             dmg: 10
         }
     ],
     greetings: [
-        'HI SWEET BOY', 
+        'MY BOY!', 
         'WHATCHA DOIN MORBY', 
         'AWW WASUP ANGEL BOY', 
         'HEY MORBY!'
@@ -73,28 +87,199 @@ const cooper = {
         'HEY! WHAT WAS THAT ABOUT', 
         'WHY ARE YOU LIKE THIS'
     ],
-    pronouns: ['HE', 'HIM', 'HIS'],
-    health: 0
+    pronouns: ['HE', 'HIM'],
+    health: 0,
+    select: {
+        icon: document.getElementById('cooper'),
+        text: document.getElementById('cooper-name')
+    },
+    sprite: './assets/sprites/cooper.png',
+    sounds: {
+        pain: [cPain0, cPain1, cPain2],
+        speech: [cSpeech0, cSpeech1, cSpeech2, cSpeech3]
+    }
 }
 
 const jordan = {
     name: 'JORDAN',
     attacks: [
         {
-            name: 'YELL',
-            info: 'JORDAN YELLED AT MORPHEUS: LEAVE ME ALONE',
+            name: 'BITE',
+            info: 'JORDAN BIT MORPHEUS???',
             dmg: 10
+        },
+        {
+            name: 'SCREAM',
+            info: 'JORDAN SCREAMED "AAAAAAAHH"',
+            dmg: 15
+        },
+        {
+            name: 'BREATHE WEIRD',
+            info: 'JORDAN RAPIDLY INAHLED AND EXHALED REALLY LOUDLY',
+            dmg: 20
+        },
+        {
+            name: 'PICK UP',
+            info: 'JORDAN PICKED UP MORPHEUS AND SWISHED HIM AROUND WHILE SINGING A LITTLE SONG',
+            dmg: 15
         }
     ],
     greetings: [
-        'HI MORPHEUS'
+        'HAVE YOU SEEN THE MORPHIN MAN',
+        '*WHISTLES*',
+        'WASSUP MARCUS'
     ],
-    pronouns: ['SHE', 'HER', 'HERS'],
-    health: 0
+    reactions: [
+        'HEY!!',
+        'QUIT IT',
+        'GRRRR',
+        'STOP IT MORPH'
+    ],
+    pronouns: ['SHE', 'HER'],
+    health: 0,
+    select: {
+        icon: document.getElementById('jordan'),
+        text: document.getElementById('jordan-name')
+    },
+    sprite: './assets/sprites/jordan.png',
+    sounds: {
+        pain: [jPain0, jPain1, jPain2],
+        speech: [jSpeech0, jSpeech1, jSpeech2]
+    }
 }
 
+const aly = {
+    name: 'ALY',
+    attacks: [
+        {
+            name: 'PICK UP',
+            info: 'ALY MOVED MORPHEUS SOMEWHERE ELSE',
+            dmg: 10
+        },
+        {
+            name: 'GIVE TREAT',
+            info: 'ALY GAVE MORPHEUS A LITTLE TREAT, LOVE IS THE ANSWER',
+            dmg: 25},
+        {
+            name: 'YELL',
+            info: 'ALY YELLED AT MORPHEUS',
+            dmg: 10
+        },
+        {
+            name: 'THREATEN',
+            info: 'ALY RACKED THE NERF GUN MENACINGLY',
+            dmg: 15
+        },
+    ],
+    greetings: [
+        'HI SWEET BOY',
+        'HI HANDSOME',
+        'PERFECT BABY ANGEL HIIII',
+        'MISTER MISTER'
+    ],
+    reactions: [
+        'WHY ARE YOU BEING EVIL',
+        'YOU BITCH',
+        'GET OFF OF ME',
+        'DO NOT ATTACK ME'
+    ],
+    pronouns: ['THEY', 'THEM'],
+    health: 0,
+    select: {
+        icon: document.getElementById('aly'),
+        text: document.getElementById('aly-name')
+    },
+    sprite: './assets/sprites/aly.png',
+    sounds: {
+        pain: [aPain0, aPain1, aPain2],
+        speech: [aSpeech0, aSpeech1, aSpeech2, aSpeech3]
+    }
+}
+
+const emerson = {
+    name: 'EMERSON',
+    attacks: [
+        {
+            name: 'DANCE',
+            info: 'EMERSON PICKED UP MORPHEUS AND MADE HIM DO A SILLY LITTLE DANCE',
+            dmg: 15
+        },
+        {
+            name: 'WHACK',
+            info: 'EMERSON WHACKED MORPHEUS WITH ONE OF HIS TOYS',
+            dmg: 15
+        },
+        {
+            name: 'NERF GUN',
+            info: 'EMERSON SHOT AT MORPHEUS',
+            dmg: 15
+        },
+        {
+            name: 'PET',
+            info: 'EMERSON PET MORPHEUS SO GOOD',
+            dmg: 15
+        }
+    ],
+    greetings: [
+        'MORBY!!!',
+        'HEY BUBBA',
+        'COME ERE!',
+        'PSPSPSPSPSPS'
+    ],
+    reactions: [
+        'OW YOU BITCH',
+        "WHERE'S THE NERF GUN",
+        "YOU'RE BEING A LITTLE JERK",
+        'STOP IT'
+    ],
+    pronouns: ['HE', 'HIM'],
+    health: 0,
+    select: {
+        icon: document.getElementById('emerson'),
+        text: document.getElementById('emerson-name')
+    },
+    sprite: './assets/sprites/emerson.png',
+    sounds: {
+        pain: [ePain0, ePain1, ePain2],
+        speech: [eSpeech0, eSpeech1, eSpeech2, eSpeech3]
+    }
+}
+
+// char list
+const chars = [cooper, jordan, emerson, aly];
 // turn list
 const turns = [turn0, turn1, turn2, turn3, turn4, turn5, turn6];
+
+// music
+const selectMusic = new Audio('./assets/sound/music/charselect.mp3');
+selectMusic.loop = true;
+selectMusic.volume = 0.25;
+const battleMusic = new Audio('./assets/sound/music/battle.mp3');
+battleMusic.loop = true;
+battleMusic.volume = 0.25;
+const victoryMusic = new Audio('./assets/sound/music/victory.mp3');
+victoryMusic.volume = 0.25;
+const lossMusic = new Audio('./assets/sound/music/loss.mp3');
+lossMusic.volume = 0.25;
+
+// sfx
+const attackSounds = [hit0, hit1, hit2, hit3, hit4, hit5, hit6, hit7];
+for (i = 0; i < attackSounds.length; i++) {
+    attackSounds[i] = new Audio(`./assets/sound/sfx/hit${i}.mp3`);
+    attackSounds[i].volume = .60;
+}
+// char sfx
+for (let obj of chars) {
+    for (i = 0; i < obj.sounds.pain.length; i++) {
+        obj.sounds.pain[i] = new Audio(`./assets/sound/${obj.name}/pain${i}.mp3`)
+    }
+    for (i = 0; i < obj.sounds.speech.length; i++) {
+        obj.sounds.speech[i] = new Audio(`./assets/sound/${obj.name}/speech${i}.mp3`)
+    }
+}
+for (i = 0; i < player.sounds.length; i++) {
+    player.sounds[i] = new Audio(`./assets/sound/morby/morby${i}.mp3`)
+}
 
 /*---state variables---*/
 
@@ -112,11 +297,23 @@ let damageToApply;
 let moveChoice;
 
 // enemy choice
-let enemy = cooper;
+let enemy;
 let enemyMoveChoice;
 
 
 /*---cached elements---*/
+
+
+// character menu background
+const selectMenu = document.getElementById('select-menu');
+// char select sprites
+const charSelectSprites = document.querySelectorAll('.char');
+// char select names
+const charSelectNames = document.querySelectorAll('.char-names');
+// char select title
+const charSelectPrompt = document.getElementById('select-menu-msg');
+// char select morph
+const charSelectMorph = document.getElementById('morpheus');
 
 // menu
 const menuEl = document.getElementById('menu');
@@ -131,7 +328,8 @@ const menuSelectorEl = document.getElementById('selecticon');
 const textBoxEl = document.getElementById('text');
 // character sprites
 const playerSpriteEl = document.getElementById('player');
-const enemySpriteEl = document.getElementById('enemy');
+const enemyEl = document.getElementById('enemy');
+const enemySpriteEl = document.getElementById('enemy-sprite');
 // character health
 let playerHealth = document.getElementById('player-healthbar');
 let enemyHealth = document.getElementById('enemy-healthbar');
@@ -146,35 +344,85 @@ let retryButton = document.getElementById('win-message');
 const morphBoyModeEl = document.getElementById('morphboy-mode');
 const gameWindow = document.getElementById('game-window');
 const bodyEl = document.querySelector('body');
+// title
+const gameTitleEl = document.getElementById('title'); 
 /*---functions---*/
 
 init();
 function init() {
     winner = 0;
-    turn = 0;
+    turn = -1;
     retryButton.style.visibility = 'hidden';
     for (let item of infoBoxEls) {
         item.style.visibility = 'visible';
     } 
-    enemySpriteEl.style.visibility = 'visible';
+    enemyEl.style.visibility = 'visible';
     playerSpriteEl.style.visibility = 'visible';
-    player.health = 100;
-    enemy.health = 0;
-    playerHealth.value = 100;
-    enemyHealth.value = 0;
-    turn0();
+    for (let char of chars) {
+        char.select.icon.removeEventListener('click', handleEnemyChoice);
+        char.select.icon.removeEventListener('mouseover', handleEnemyMouseOver);
+        char.select.icon.removeEventListener('mouseout', handleEnemyMouseOut);
+        if (char.health < 100) {
+            // click => handleEnemyChoice
+            char.select.icon.addEventListener('click', handleEnemyChoice);
+            // hover => handleEnemyMouseOver
+            char.select.icon.addEventListener('mouseover', handleEnemyMouseOver);
+            char.select.icon.addEventListener('mouseout', handleEnemyMouseOut);
+        } else if (char.health >= 100) {
+            char.select.icon.style.filter = 'grayscale(1)';
+            char.select.text.style.textDecoration = 'line-through';
+        }
+    }
+    turnNeg1();
 }
 // turn logic
+
+// turn -1 - player selects target
+function turnNeg1() {
+    // add top layer background
+    selectMusic.removeEventListener('canplaythrough', playMusic);
+    selectMusic.currentTime = 0;
+    selectMusic.addEventListener('canplaythrough', playMusic);
+    selectMenu.style.visibility = 'visible';
+    for (let item of charSelectSprites){
+        item.style.visibility = 'visible';
+    }
+    for (let item of charSelectNames){
+        item.style.visibility = 'visible';
+    }
+    charSelectPrompt.style.visibility = 'visible';
+    charSelectMorph.style.visibility = 'visible';
+    // start music loop
+}
 
 // turn 0 - enemy greets morpheus
 function turn0() {
     // make textbox visible and menu choices invisible
+    selectMusic.pause();
+    battleMusic.removeEventListener('canplaythrough', playMusic);
+    battleMusic.currentTime = 0;
+    battleMusic.addEventListener('canplaythrough', playMusic);
     renderTextBoxEl();
+    selectMenu.style.visibility = 'hidden';
+    for (let item of charSelectSprites){
+        item.style.visibility = 'hidden';
+    }
+    for (let item of charSelectNames){
+        item.style.visibility = 'hidden';
+    }
+    charSelectPrompt.style.visibility = 'hidden';
+    charSelectMorph.style.visibility = 'hidden';
+    // reset player health and reset enemy health if they were not previously defeated
+    player.health = 100;
+    enemy.health = 0;
+    playerHealth.value = 100;
+    enemyHealth.value = 0;
     // print greeting text
     let randomGreeting = `${enemy.name}: ${enemy.greetings[Math.floor(Math.random() * enemy.greetings.length)]}`
     typeSentence(randomGreeting, textBoxEl)
     // move pawprint to bottom right of menu and only show if textPrinted is true
     waitAndRenderSelectorEl(randomGreeting);
+    pickRandomSound(enemy.sounds.speech);
 }
 
 // turn 1 - morpheus chooses attack
@@ -204,9 +452,12 @@ function turn2() {
     // apply and animate damage received
     enemy.health += damageToApply;
     enemyHealth.value += damageToApply;
-    pain(enemySpriteEl);
+    pain(enemyEl);
     typeSentence(actionText, textBoxEl);
     waitAndRenderSelectorEl(actionText);
+    // play random attack sound
+    pickRandomSound(attackSounds);
+    pickRandomSound(enemy.sounds.pain);
 }
 
 // turn 3 - enemy reaction text to morpheus' attack
@@ -222,7 +473,8 @@ function turn3() {
     if (winner === 1) {
         reactionText = `${enemy.name} GOT SO PISSED OFF THAT ${enemy.pronouns[0]} LEFT. YOU WIN?`
     } else if (winner === 0){
-        reactionText = `${enemy.name}: ${enemy.reactions[Math.floor(Math.random() * enemy.reactions.length)]}`
+        reactionText = `${enemy.name}: ${enemy.reactions[Math.floor(Math.random() * enemy.reactions.length)]}`;
+        pickRandomSound(enemy.sounds.speech);
     }
     typeSentence(reactionText, textBoxEl);
     waitAndRenderSelectorEl(reactionText);
@@ -256,6 +508,7 @@ function turn5() {
     pain(playerSpriteEl);
     typeSentence(enemyActionText, textBoxEl);
     waitAndRenderSelectorEl(enemyActionText);
+    pickRandomSound(attackSounds);
 }
 
 // turn 6 - morpheus reaction text to enemy attack
@@ -271,6 +524,7 @@ function turn6() {
         reactionText = `MORPHEUS IS NO LONGER EXCITED AND IS GONNA TAKE A NAP.`
     } else if (winner === 0){
         reactionText = `MORPHEUS: ${player.reactions[Math.floor(Math.random() * player.reactions.length)]}`
+        pickRandomSound(player.sounds);
     }
     typeSentence(reactionText, textBoxEl);
     waitAndRenderSelectorEl(reactionText);
@@ -287,6 +541,28 @@ function advanceTurn() {
     } else return;
 }
 
+// handle enemy choice
+function handleEnemyChoice(evt) {
+    // change enemy value
+    enemy = eval(evt.target.id);
+    // change enemy sprite
+    enemySpriteEl.setAttribute("src", enemy.sprite);
+    // advance to turn 0
+    turn = 0;
+    turn0();
+}
+
+// handle hover over enemy
+function handleEnemyMouseOver(evt) {
+    evt.target.style.height = '220px';
+    evt.target.style.transition = 'height 300ms ease';
+}
+
+function handleEnemyMouseOut(evt) {
+    evt.target.style.height = '200px';
+}
+
+
 function handleMoveChoice(evt) {
     let evtId = evt.target.getAttribute('id');
     let evtIdArr = evtId.split('')
@@ -300,10 +576,18 @@ function handleMoveChoice(evt) {
 function checkWinner() {
     if (enemy.health >= 100) {
         winner = 1;
-        enemySpriteEl.style.visibility = 'hidden';
+        enemyEl.style.visibility = 'hidden';
+        battleMusic.pause();
+        victoryMusic.removeEventListener('canplaythrough', playMusic);
+        victoryMusic.currentTime = 0;
+        victoryMusic.addEventListener('canplaythrough', playMusic);
     } else if (player.health <= 0) {
         winner = -1;
         playerSpriteEl.style.visibility = 'hidden';
+        battleMusic.pause();
+        lossMusic.removeEventListener('canplaythrough', playMusic);
+        lossMusic.currentTime = 0;
+        lossMusic.addEventListener('canplaythrough', playMusic);
     } else winner = 0;
     if (winner !== 0) {
         retryButton.style.visibility = 'visible';
@@ -349,9 +633,13 @@ function toggleMorphBoyMode() {
     if (morphBoyMode === -1) {
         gameWindow.style.filter = 'invert(40%) sepia(100%) hue-rotate(61deg) brightness(90%) contrast(350%) saturate(50%)';
         bodyEl.style.backgroundColor = 'rgba(184,185,189,255)';
+        gameTitleEl.style.backgroundColor = 'rgba(0,0,0,0)';
+        gameTitleEl.style.color = 'rgba(0,4,125,255)'
     } else if (morphBoyMode === 1) {
         gameWindow.style.filter = 'none';
         bodyEl.style.backgroundColor = 'rgba(58, 58, 58,255)';
+        gameTitleEl.style.backgroundColor = '#23232b';
+        gameTitleEl.style.color = '#ffffff'
     }
 };
 
@@ -367,7 +655,27 @@ async function pain(target) {
     return;
 }
 
-// 
+// async function attackAnimation(target) {
+    // add attack animation
+    // await animation time
+    // remove attack animation
+// }
+
+// async function playerAttackSprite() {
+    // pass move selection
+    // change image for attack sprite
+// }
+
+// sound
+
+function playMusic(evt) {
+    evt.target.play();
+}
+
+function pickRandomSound(soundArr) {
+    let randomInt = Math.abs((Math.floor(Math.random() * soundArr.length)) - 1);
+    soundArr[randomInt].play();
+}
 // text print fn
 async function waitAndRenderSelectorEl(str) {
     const timeToWait = (str.length + 1) * 32;
@@ -385,6 +693,7 @@ async function typeSentence(str, elId) {
     let typingTarget = elId;
     while (i < letters.length) {
         await waitForMs(25);
+        // 
         typingTarget.append(letters[i]);
         i++
     }
@@ -399,13 +708,12 @@ function waitForMs(ms) {
 
 
 /*---event listeners---*/
-
+// char choices
 
 // menu choices
 for (let option of menuOptionEls) {
     option.addEventListener('click', handleMoveChoice);
 }
-// menu hover
 // textbox advance
 textBoxEl.addEventListener('click', advanceTurn);
 menuEl.addEventListener('click', advanceTurn);
